@@ -7,8 +7,7 @@
         <title>CONSULTING FORMATION</title>
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="assets/img/icon.png" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -38,9 +37,9 @@
             <div class="container d-flex align-items-center">
                 <h3 class="logo mr-auto"><span class="text-success">CONSULTING</span>FORMATION</h3>
                 <nav class="nav-menu d-none d-lg-block">
-                    <ul class="ml-2">
+                    <ul class="ml-4">
                         <li class="active"><router-link to="/">Accueil</router-link></li>
-                        <li class="drop-down"><a href="">Services</a>
+                        <li class="drop-down"><a href="#">Services</a>
                             <ul>
                                 <li><router-link to="#">Service 1</router-link></li>
                                 <li><router-link to="#">Service 2</router-link></li>

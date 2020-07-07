@@ -2006,7 +2006,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.form.message = '';
         Toast.fire({
           icon: 'success',
-          title: 'Votre message est envoyé avec succès'
+          title: 'Message envoyé avec succès !'
         });
 
         _this.$Progress.finish();
@@ -42335,18 +42335,24 @@ var staticRenderFns = [
                       "col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center"
                   },
                   [
-                    _c("h1", { staticClass: "text-bold" }, [
+                    _c("h1", { staticClass: "text-white" }, [
                       _vm._v("CONSULTING FORMATION")
                     ]),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("h4", [
+                    _c("h4", { staticClass: "font-italic" }, [
+                      _c("i", { staticClass: "bx bx-check" }),
                       _vm._v(
-                        "Formation professionnelle destinée à des adultes entrés dans la vie active."
+                        " Formation professionnelle destinée à des adultes entrés dans la vie active."
                       )
                     ]),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("h4", [
-                      _vm._v("Formation interne des administrations publiques.")
+                    _c("h4", { staticClass: "font-italic" }, [
+                      _c("i", { staticClass: "bx bx-check" }),
+                      _vm._v(
+                        " Formation interne des administrations publiques."
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", [
@@ -42370,14 +42376,13 @@ var staticRenderFns = [
                 _c(
                   "div",
                   {
-                    staticClass:
-                      "col-xl-4 col-lg-6 order-1 order-lg-2 hero-img",
+                    staticClass: "col-xl-4 col-lg-6 order-1 order-lg-2",
                     attrs: { "data-aos": "zoom-in", "data-aos-delay": "150" }
                   },
                   [
                     _c("img", {
                       staticClass: "img-fluid animated",
-                      attrs: { src: "assets/img/hero-img.png", alt: "" }
+                      attrs: { src: "assets/img/tech.png", alt: "" }
                     })
                   ]
                 )
@@ -58019,7 +58024,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_2___default.a, {
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
-  height: '5px'
+  height: '6px'
 }); //Toast for SweetAlert2
 
 var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.mixin({

@@ -357,6 +357,10 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+#hero .animated{
+  animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+
 #hero .carousel, #hero .carousel-inner, #hero .carousel-item, #hero .carousel-item::before {
   background-size: cover;
   background-position: center;

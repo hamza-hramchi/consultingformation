@@ -97,7 +97,7 @@
                 this.form.message = '';
                 Toast.fire({
                   icon: 'success',
-                  title: 'Votre message est envoyé avec succès'
+                  title: 'Message envoyé avec succès !'
                 })
                 this.$Progress.finish();
               }
@@ -114,6 +114,6 @@
 
       mounted() {
             //
-        }
+      }
     }
 </script>
