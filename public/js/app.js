@@ -1977,20 +1977,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2112,6 +2098,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {}
 });
@@ -2127,6 +2136,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -42009,37 +42022,29 @@ var staticRenderFns = [
                     _c("div", { staticClass: "col-lg-4 info" }, [
                       _c("i", { staticClass: "icofont-google-map" }),
                       _vm._v(" "),
-                      _c("h4", [_vm._v("Location:")]),
+                      _c("h4", [_vm._v("Adresse")]),
                       _vm._v(" "),
                       _c("p", [
-                        _vm._v("A108 Adam Street"),
+                        _vm._v("26 Rue DES RIGOLES"),
                         _c("br"),
-                        _vm._v("New York, NY 535022")
+                        _vm._v("75020 PARIS 20, France")
                       ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-4 info mt-4 mt-lg-0" }, [
                       _c("i", { staticClass: "icofont-envelope" }),
                       _vm._v(" "),
-                      _c("h4", [_vm._v("Email:")]),
+                      _c("h4", [_vm._v("Email")]),
                       _vm._v(" "),
-                      _c("p", [
-                        _vm._v("info@example.com"),
-                        _c("br"),
-                        _vm._v("contact@example.com")
-                      ])
+                      _c("p", [_vm._v("atmane77@yahoo.fr")])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-4 info mt-4 mt-lg-0" }, [
                       _c("i", { staticClass: "icofont-phone" }),
                       _vm._v(" "),
-                      _c("h4", [_vm._v("Call:")]),
+                      _c("h4", [_vm._v("Téléphone")]),
                       _vm._v(" "),
-                      _c("p", [
-                        _vm._v("+1 5589 55488 51"),
-                        _c("br"),
-                        _vm._v("+1 5589 22475 14")
-                      ])
+                      _c("p", [_vm._v("+33 7 51 32 47 11")])
                     ])
                   ])
                 ])
@@ -42059,11 +42064,7 @@ var staticRenderFns = [
                   "form",
                   {
                     staticClass: "php-email-form",
-                    attrs: {
-                      action: "forms/contact.php",
-                      method: "post",
-                      role: "form"
-                    }
+                    attrs: { amethod: "post", role: "form" }
                   },
                   [
                     _c("div", { staticClass: "form-row" }, [
@@ -42074,13 +42075,9 @@ var staticRenderFns = [
                             type: "text",
                             name: "name",
                             id: "name",
-                            placeholder: "Your Name",
-                            "data-rule": "minlen:4",
-                            "data-msg": "Please enter at least 4 chars"
+                            placeholder: "Votre Nom"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "validate" })
+                        })
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6 form-group" }, [
@@ -42090,13 +42087,9 @@ var staticRenderFns = [
                             type: "email",
                             name: "email",
                             id: "email",
-                            placeholder: "Your Email",
-                            "data-rule": "email",
-                            "data-msg": "Please enter a valid email"
+                            placeholder: "Votre Email"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "validate" })
+                        })
                       ])
                     ]),
                     _vm._v(" "),
@@ -42105,15 +42098,11 @@ var staticRenderFns = [
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
-                          name: "subject",
+                          name: "title",
                           id: "subject",
-                          placeholder: "Subject",
-                          "data-rule": "minlen:4",
-                          "data-msg": "Please enter at least 8 chars of subject"
+                          placeholder: "Titre"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "validate" })
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
@@ -42122,31 +42111,17 @@ var staticRenderFns = [
                         attrs: {
                           name: "message",
                           rows: "5",
-                          "data-rule": "required",
-                          "data-msg": "Please write something for us",
                           placeholder: "Message"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "validate" })
+                      })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "mb-3" }, [
-                      _c("div", { staticClass: "loading" }, [
-                        _vm._v("Loading")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "error-message" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "sent-message" }, [
-                        _vm._v("Your message has been sent. Thank you!")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text-center" }, [
-                      _c("button", { attrs: { type: "submit" } }, [
-                        _vm._v("Send Message")
-                      ])
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "button",
+                        { staticClass: "form-control btn btn-success" },
+                        [_vm._v("Envoyer")]
+                      )
                     ])
                   ]
                 )
@@ -42186,7 +42161,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
+    return _c("div", [
+      _c(
+        "section",
+        { staticClass: "d-flex align-items-center", attrs: { id: "hero" } },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "container-fluid",
+              attrs: { "data-aos": "fade-up" }
+            },
+            [
+              _c("div", { staticClass: "row justify-content-center" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center"
+                  },
+                  [
+                    _c("h1", { staticClass: "text-bold" }, [
+                      _vm._v("CONSULTING FORMATION")
+                    ]),
+                    _vm._v(" "),
+                    _c("h4", [
+                      _vm._v(
+                        "Formation professionnelle destinée à des adultes entrés dans la vie active."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h4", [
+                      _vm._v("Formation interne des administrations publiques.")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn-get-started scrollto",
+                          attrs: { href: "#about" }
+                        },
+                        [
+                          _c("i", { staticClass: "bx bx-calendar" }),
+                          _vm._v(
+                            "\r\n                  Besoin de renseignements ! Rendez-vous ici.\r\n                  "
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-xl-4 col-lg-6 order-1 order-lg-2 hero-img",
+                    attrs: { "data-aos": "zoom-in", "data-aos-delay": "150" }
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid animated",
+                      attrs: { src: "assets/img/hero-img.png", alt: "" }
+                    })
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
       _c("section", { staticClass: "about-us", attrs: { id: "about-us" } }, [
         _c(
           "div",
@@ -42386,15 +42432,27 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
+      _c(
+        "section",
+        { staticClass: "breadcrumbs", attrs: { id: "breadcrumbs" } },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "div",
+              {
+                staticClass: "d-flex justify-content-between align-items-center"
+              },
+              [_c("h2", [_vm._v("Les références")])]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _c("section", { staticClass: "faq section-bg", attrs: { id: "faq" } }, [
         _c(
           "div",
           { staticClass: "container", attrs: { "data-aos": "fade-up" } },
           [
-            _c("div", { staticClass: "section-title" }, [
-              _c("h2", [_vm._v("Les références")])
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "faq-list" }, [
               _c("ul", [
                 _c("li", { attrs: { "data-aos": "fade-up" } }, [

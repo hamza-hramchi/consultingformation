@@ -1,13 +1,17 @@
 <template>
     <div class="container">
-        <!-- ======= Frequently Asked Questions Section ======= -->
+      <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+          <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2>Les références</h2>
+            </div>
+          </div>
+        </section><!-- End Breadcrumbs -->
+        
     <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Les références</h2>
-        </div>
-
+        
         <div class="faq-list">
           <ul>
                 <li data-aos="fade-up">

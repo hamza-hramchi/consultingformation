@@ -1,5 +1,28 @@
 <template>
-<div class="container">
+<div>
+  <!-- ======= Hero Section ======= -->
+        <section id="hero" class="d-flex align-items-center">
+
+          <div class="container-fluid" data-aos="fade-up">
+            <div class="row justify-content-center">
+              <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                <h1 class="text-bold">CONSULTING FORMATION</h1>
+                <h4>Formation professionnelle destinée à des adultes entrés dans la vie active.</h4>
+                <h4>Formation interne des administrations publiques.</h4>
+                <div><a href="#about" class="btn-get-started scrollto">
+                  <i class="bx bx-calendar"></i>
+                  Besoin de renseignements ! Rendez-vous ici.
+                  </a>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
+                <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <!-- End Hero -->
 
     <!-- ======= About Us Section ======= -->
     <section id="about-us" class="about-us">
