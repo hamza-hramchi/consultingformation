@@ -38,23 +38,28 @@
 
             <div class="row mt-5 justify-content-center" data-aos="fade-up">
               <div class="col-lg-10">
-                <form amethod="post" role="form" class="php-email-form">
+
+                <form class="php-email-form">
                   <div class="form-row">
                     <div class="col-md-6 form-group">
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Votre Nom"/>
+                      <input v-model="form.name" type="text" name="name" class="form-control" id="name" placeholder="Votre Nom" :class="{ 'is-invalid': form.errors.has('name') }"/>
+                      <has-error :form="form" field="name"></has-error>
                     </div>
                     <div class="col-md-6 form-group">
-                      <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"/>
+                      <input v-model="form.email" type="email" class="form-control" name="email" id="email" placeholder="Votre Email" :class="{ 'is-invalid': form.errors.has('email') }"/>
+                      <has-error :form="form" field="email"></has-error>
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="title" id="subject" placeholder="Titre"/>
+                    <input v-model="form.title" type="text" class="form-control" name="title" id="subject" placeholder="Titre" :class="{ 'is-invalid': form.errors.has('title') }"/>
+                    <has-error :form="form" field="title"></has-error>
                   </div>
                   <div class="form-group">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+                    <textarea v-model="form.message" class="form-control" name="message" rows="5" placeholder="Message" :class="{ 'is-invalid': form.errors.has('message') }"></textarea>
+                    <has-error :form="form" field="message"></has-error>
                   </div>
                   <div class="form-group">
-                    <button class="form-control btn btn-success">Envoyer</button>
+                    <button @click.prevent="saveMessage"  type="submit" class="form-control btn btn-success">Envoyer</button>
                   </div>
                 </form>
 
@@ -69,8 +74,46 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+      data(){
+        return {
+          form : new Form({
+            name :'',
+            email : '',
+            title : '',
+            message : ''
+          })
+        }
+      },
+      
+      methods:{
+        saveMessage(event){
+          this.form.post("/contact")
+            .then(
+              () => {
+                this.$Progress.start();
+                this.form.name = '';
+                this.form.email = '';
+                this.form.title = '';
+                this.form.message = '';
+                Toast.fire({
+                  icon: 'success',
+                  title: 'Votre message est envoyé avec succès'
+                })
+                this.$Progress.finish();
+              }
+            )
+            .catch(
+              () => {
+                  this.$Progress.start();
+                  this.$Progress.fail();
+                }
+            );
+        },
+        
+      },
+
+      mounted() {
+            //
         }
     }
 </script>

@@ -1977,9 +1977,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      form: new Form({
+        name: '',
+        email: '',
+        title: '',
+        message: ''
+      })
+    };
+  },
+  methods: {
+    saveMessage: function saveMessage(event) {
+      var _this = this;
+
+      this.form.post("/contact").then(function () {
+        _this.$Progress.start();
+
+        _this.form.name = '';
+        _this.form.email = '';
+        _this.form.title = '';
+        _this.form.message = '';
+        Toast.fire({
+          icon: 'success',
+          title: 'Votre message est envoyé avec succès'
+        });
+
+        _this.$Progress.finish();
+      })["catch"](function () {
+        _this.$Progress.start();
+
+        _this.$Progress.fail();
+      });
+    }
+  },
+  mounted: function mounted() {//
   }
 });
 
@@ -41983,154 +42021,270 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "contact", attrs: { id: "contact" } }, [
+      _c("div", { staticClass: "container" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "row mt-5 justify-content-center",
+            attrs: { "data-aos": "fade-up" }
+          },
+          [
+            _c("div", { staticClass: "col-lg-10" }, [
+              _c("form", { staticClass: "php-email-form" }, [
+                _c("div", { staticClass: "form-row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-6 form-group" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name,
+                            expression: "form.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.form.errors.has("name") },
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          id: "name",
+                          placeholder: "Votre Nom"
+                        },
+                        domProps: { value: _vm.form.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "name" }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-6 form-group" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.email,
+                            expression: "form.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.form.errors.has("email") },
+                        attrs: {
+                          type: "email",
+                          name: "email",
+                          id: "email",
+                          placeholder: "Votre Email"
+                        },
+                        domProps: { value: _vm.form.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "email", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "email" }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.title,
+                          expression: "form.title"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.form.errors.has("title") },
+                      attrs: {
+                        type: "text",
+                        name: "title",
+                        id: "subject",
+                        placeholder: "Titre"
+                      },
+                      domProps: { value: _vm.form.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "title", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "title" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.message,
+                          expression: "form.message"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.form.errors.has("message") },
+                      attrs: {
+                        name: "message",
+                        rows: "5",
+                        placeholder: "Message"
+                      },
+                      domProps: { value: _vm.form.message },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "message", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "message" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "form-control btn btn-success",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.saveMessage($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Envoyer")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c(
-        "section",
-        { staticClass: "breadcrumbs", attrs: { id: "breadcrumbs" } },
-        [
-          _c("div", { staticClass: "container" }, [
-            _c(
-              "div",
-              {
-                staticClass: "d-flex justify-content-between align-items-center"
-              },
-              [_c("h2", [_vm._v("Contact")])]
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("section", { staticClass: "contact", attrs: { id: "contact" } }, [
+    return _c(
+      "section",
+      { staticClass: "breadcrumbs", attrs: { id: "breadcrumbs" } },
+      [
         _c("div", { staticClass: "container" }, [
           _c(
             "div",
             {
-              staticClass: "row justify-content-center",
-              attrs: { "data-aos": "fade-up" }
+              staticClass: "d-flex justify-content-between align-items-center"
             },
-            [
-              _c("div", { staticClass: "col-lg-10" }, [
-                _c("div", { staticClass: "info-wrap" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-4 info" }, [
-                      _c("i", { staticClass: "icofont-google-map" }),
-                      _vm._v(" "),
-                      _c("h4", [_vm._v("Adresse")]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v("26 Rue DES RIGOLES"),
-                        _c("br"),
-                        _vm._v("75020 PARIS 20, France")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-4 info mt-4 mt-lg-0" }, [
-                      _c("i", { staticClass: "icofont-envelope" }),
-                      _vm._v(" "),
-                      _c("h4", [_vm._v("Email")]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("atmane77@yahoo.fr")])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-4 info mt-4 mt-lg-0" }, [
-                      _c("i", { staticClass: "icofont-phone" }),
-                      _vm._v(" "),
-                      _c("h4", [_vm._v("Téléphone")]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("+33 7 51 32 47 11")])
-                    ])
-                  ])
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "row mt-5 justify-content-center",
-              attrs: { "data-aos": "fade-up" }
-            },
-            [
-              _c("div", { staticClass: "col-lg-10" }, [
-                _c(
-                  "form",
-                  {
-                    staticClass: "php-email-form",
-                    attrs: { amethod: "post", role: "form" }
-                  },
-                  [
-                    _c("div", { staticClass: "form-row" }, [
-                      _c("div", { staticClass: "col-md-6 form-group" }, [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            id: "name",
-                            placeholder: "Votre Nom"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6 form-group" }, [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "email",
-                            name: "email",
-                            id: "email",
-                            placeholder: "Votre Email"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "title",
-                          id: "subject",
-                          placeholder: "Titre"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "message",
-                          rows: "5",
-                          placeholder: "Message"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "button",
-                        { staticClass: "form-control btn btn-success" },
-                        [_vm._v("Envoyer")]
-                      )
-                    ])
-                  ]
-                )
-              ])
-            ]
+            [_c("h2", [_vm._v("Contact")])]
           )
         ])
-      ])
-    ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "row justify-content-center",
+        attrs: { "data-aos": "fade-up" }
+      },
+      [
+        _c("div", { staticClass: "col-lg-10" }, [
+          _c("div", { staticClass: "info-wrap" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-4 info" }, [
+                _c("i", { staticClass: "icofont-google-map" }),
+                _vm._v(" "),
+                _c("h4", [_vm._v("Adresse")]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("26 Rue DES RIGOLES"),
+                  _c("br"),
+                  _vm._v("75020 PARIS 20, France")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-4 info mt-4 mt-lg-0" }, [
+                _c("i", { staticClass: "icofont-envelope" }),
+                _vm._v(" "),
+                _c("h4", [_vm._v("Email")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("atmane77@yahoo.fr")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-4 info mt-4 mt-lg-0" }, [
+                _c("i", { staticClass: "icofont-phone" }),
+                _vm._v(" "),
+                _c("h4", [_vm._v("Téléphone")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("+33 7 51 32 47 11")])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -57859,6 +58013,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a;
 window.Form = vform__WEBPACK_IMPORTED_MODULE_0__["Form"];
+Vue.component(vform__WEBPACK_IMPORTED_MODULE_0__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_0__["HasError"]);
+Vue.component(vform__WEBPACK_IMPORTED_MODULE_0__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_0__["AlertError"]);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_2___default.a, {
   color: 'rgb(143, 255, 199)',
@@ -57870,7 +58026,7 @@ var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
-  timer: 2000,
+  timer: 3000,
   timerProgressBar: true,
   onOpen: function onOpen(toast) {
     toast.addEventListener('mouseenter', sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.stopTimer);

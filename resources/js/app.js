@@ -11,6 +11,8 @@ window.Vue = require('vue');
 window.Swal = Swal;
 window.Form = Form;
 
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
 Vue.use(VueRouter);
 Vue.use(VueProgressBar, {
@@ -24,7 +26,7 @@ Vue.use(VueProgressBar, {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 2000,
+    timer: 3000,
     timerProgressBar: true,
     onOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
