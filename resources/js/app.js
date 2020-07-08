@@ -42,6 +42,7 @@ let routes = [
   { path: '/services', component: require('./components/Services.vue').default },
   { path: '/references', component: require('./components/References.vue').default },
   { path: '/contact', component: require('./components/Contact.vue').default },
+  { path: '/rendezvous', component: require('./components/RendezVous.vue').default },
    
 ]
 

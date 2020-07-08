@@ -9,10 +9,10 @@
                 <h1 class="text-white">CONSULTING FORMATION</h1><br>
                 <h4 class="font-italic"><i class="bx bx-check"></i> Formation professionnelle destinée à des adultes entrés dans la vie active.</h4><br>
                 <h4 class="font-italic"><i class="bx bx-check"></i> Formation interne des administrations publiques.</h4>
-                <div><a href="#about" class="btn-get-started scrollto">
+                <div><router-link to="/rendezvous" class="btn-get-started scrollto">
                   <i class="bx bx-calendar"></i>
                   Besoin de renseignements ! Rendez-vous ici.
-                  </a>
+                  </router-link>
                   </div>
               </div>
               <div class="col-xl-4 col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="150">
