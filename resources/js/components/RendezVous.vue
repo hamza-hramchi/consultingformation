@@ -41,6 +41,10 @@
               <div class="col-lg-10">
 
                 <form class="php-email-form">
+                    <div class="form-row form-group">
+                        <h5><i class="bx bx-user text-info"></i> Informations personnelles</h5>
+                    </div>
+                    <hr>
                   <div class="form-row">
                     <div class="col-md-6 form-group">
                       <input  type="text" name="prenom" class="form-control"  placeholder="Votre Prénom" />
@@ -63,12 +67,37 @@
                     <!--  <has-error :form="form" field="tel"></has-error> -->
                     </div>
                   </div>
-                  
-                  <div class="form-group">
-                    <button  type="submit" class="form-control btn btn-success">Envoyer</button>
+
+                  <div class="form-row form-group">
+                        <h5><i class="bx bx-list-ul text-info"></i> Service</h5>
+                    </div>
+                    <div class="form-row form-group">
+                        <select name="service" id="service" class="form-control" v-model="service">
+                            <option value="MANAGEMENT">Management</option>
+                            <option value="IOT">IOT</option>
+                            <option value="RH">RH</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <h5><i class="bx bx-calendar text-info"></i> Date et heure du rendez-vous</h5>
+                    </div>
+                    <div class="form-row form-group">
+                        <VueCtkDateTimePicker v-model="date" min-date="2020-07"  label="Veuillez choisir une date" only-date no-weekends-days inline format="DD-MM-YYYY"  button-now-translation="La date d'ajourd'hui"></VueCtkDateTimePicker>
+                    </div>
+
+                    <div class="form-row form-group">
+                        <VueCtkDateTimePicker v-model="time" disabledHours[00,01]  format="hh:mm" minute-interval=30 only-time no-weekends-days inline></VueCtkDateTimePicker>
+                    </div>
+                <hr>
+                  <div class="form-row form-group">
+                      <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="valid" v-model="valid">
+                            <label class="form-check-label" for="valid">Je confirme la validité des informations personnelles ci-dessus.</label>
+                            </div>                      
+                    <button @click.prevent="getDateTime"  type="submit" class="form-control btn btn-success">Envoyer</button>
                   </div>
                 </form>
-
               </div>
 
             </div>
@@ -80,6 +109,29 @@
 
 <script>
     export default {
+        data(){
+            return {
+                date : '',
+                time : '',
+                service : '',
+                valid : false
+            }
+        },
+
+        methods : {
+            getDateTime(){
+                Swal.fire({
+                    title: 'Informations du rendez-vous' ,
+                    text: 'Le: ' + this.date + ' à ' + this.time + '. Service : ' + this.service,
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Confirmer',
+                    cancelButtonText : 'Annuler'
+                    })
+                
+            }
+        },
       
       mounted() {}
     }
