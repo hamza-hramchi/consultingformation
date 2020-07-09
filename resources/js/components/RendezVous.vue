@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="form-row form-group">
-                        <VueCtkDateTimePicker v-model="time" disabledHours[00,01]  format="hh:mm" minute-interval=30 only-time no-weekends-days inline></VueCtkDateTimePicker>
+                        <VueCtkDateTimePicker v-model="time" v-bind:disabledHours="disabledHours"  format="HH:mm" minute-interval=30 only-time inline></VueCtkDateTimePicker>
                     </div>
                 <hr>
                   <div class="form-row form-group">
@@ -114,7 +114,8 @@
                 date : '',
                 time : '',
                 service : '',
-                valid : false
+                valid : false,
+                disabledHours : ['00','01','02','03','04','05','06','07','08','12','13','14','18','19','20','21','22','23']
             }
         },
 
