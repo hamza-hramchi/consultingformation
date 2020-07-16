@@ -22,9 +22,13 @@ a:hover {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-family: "Roboto", sans-serif;
 }
+h4, h5, h6, p {
+  font-family:  "URW Gothic L", sans-serif;
+}
+
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -71,18 +75,18 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   background: #fff;
   transition: all 0.5s;
-  z-index: 997;
+  z-index: 800;
   padding: 15px 0;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 #header .logo {
-  font-size: 28px;
+  font-size: 25px;
   margin: 0;
   padding: 0;
   line-height: 1;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
 }
 
@@ -128,6 +132,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-family: "Roboto", sans-serif;
 }
+
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
   color: #1bbd36;
@@ -214,7 +219,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Mobile Navigation */
 .mobile-nav-toggle {
   position: fixed;
-  right: 15px;
+  right: 10px;
   top: 15px;
   z-index: 9998;
   border: 0;
@@ -229,6 +234,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-nav-toggle i {
   color: #1bbd36;
+  margin-left: 11px;
 }
 
 .mobile-nav {
@@ -321,26 +327,32 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Header Social Links
 --------------------------------------------------------------*/
-.header-social-links {
+.appointment {
   padding-left: 14px;
   margin-left: 20px;
-  border-left: 1px solid #c4c4c4;
+  border-left: 1px solid #1a1749;
 }
 
-.header-social-links a {
-  color: #a0a0a0;
-  padding-left: 6px;
+.appointment a {
+  color: #111311;
+  padding-left: 7px;
   display: inline-block;
   line-height: 1px;
   transition: 0.3s;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  white-space: nowrap;
 }
 
-.header-social-links a:hover {
-  color: #1bbd36;
+.appointment a:hover {
+  color: #199b0d;
 }
 
 @media (max-width: 768px) {
-  .header-social-links {
+  .appointment {
     padding: 0 48px 0 0;
     border-left: 0;
   }
@@ -351,10 +363,11 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
-  background-color: rgba(14, 34, 20, 0.644);
+  height: 92vh;
+  background-color: #4a6b4a;
   overflow: hidden;
   position: relative;
+  font-family: "Charcoal", sans-serif;
 }
 
 #hero .animated{
@@ -390,6 +403,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
   border-top: 5px solid #1bbd36;
+  margin-bottom: 5px;
 }
 
 #hero .carousel-content h2 {
@@ -418,7 +432,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero .btn-get-started:hover {
   background: #1bbd36;
-  color: #fff;
+  color: rgb(14, 13, 13);
   text-decoration: none;
 }
 
@@ -1419,11 +1433,11 @@ section {
   animation: animate-loading 1s linear infinite;
 }
 
-.contact .php-email-form input, .contact .php-email-form textarea {
-  border-radius: 0;
+.contact .php-email-form input , .contact .php-email-form textarea {
+  border-radius: 5px;
   box-shadow: none;
   font-size: 14px;
-  border-radius: 4px;
+  border-color: rgb(100, 107, 138);
 }
 
 .contact .php-email-form input:focus, .contact .php-email-form textarea:focus {
@@ -2093,7 +2107,7 @@ section {
 --------------------------------------------------------------*/
 #footer {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   background: #111;
 }
 

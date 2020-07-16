@@ -17,25 +17,25 @@ window.Form = Form;
 
 /*--------------------------------------------------------------------------*/
 
+Vue.use(VueRouter);
+Vue.use(VueProgressBar, {
+  color: 'green',
+  failedColor: 'red',
+  height: '5px'
+})
+
+/*--------------------------------------------------------------------------*/
+
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 
 /*--------------------------------------------------------------------------*/
 
-Vue.use(VueRouter);
-Vue.use(VueProgressBar, {
-  color: 'rgb(143, 255, 199)',
-  failedColor: 'red',
-  height: '6px'
-})
-
-/*--------------------------------------------------------------------------*/
-
 //Toast for SweetAlert2
  const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'center',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -54,7 +54,8 @@ let routes = [
   { path: '/services', component: require('./components/Services.vue').default },
   { path: '/references', component: require('./components/References.vue').default },
   { path: '/contact', component: require('./components/Contact.vue').default },
-  { path: '/rendezvous', component: require('./components/RendezVous.vue').default },
+  { path: '/rendezvous', component: require('./components/Appointment.vue').default },
+  { path : '/equipe', component: require('./components/Team.vue').default }
 ]
 
 /*--------------------------------------------------------------------------*/

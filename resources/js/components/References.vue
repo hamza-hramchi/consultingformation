@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="">
       <!-- ======= Breadcrumbs ======= -->
         <section id="breadcrumbs" class="breadcrumbs">
           <div class="container">

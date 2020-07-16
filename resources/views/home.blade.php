@@ -6,6 +6,9 @@
         
         <title>CONSULTING FORMATION</title>
 
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
         <!-- Favicons -->
         <link href="assets/img/icon.png" rel="icon">
 
@@ -35,11 +38,11 @@
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center">
-                <h3 class="logo mr-auto"><span class="text-success">CONSULTING</span>FORMATION</h3>
+                <h5 class="logo mr-auto"><span class="text-success">Consulting</span>Formation</h5>
                 <nav class="nav-menu d-none d-lg-block">
                     <ul class="ml-4">
                         <li class="active"><router-link to="/">Accueil</router-link></li>
-                        <li class="drop-down"><a href="#">Services</a>
+                        <li class="drop-down"><router-link to="">Services</router-link>
                             <ul>
                                 <li><router-link to="#">Service 1</router-link></li>
                                 <li><router-link to="#">Service 2</router-link></li>
@@ -48,15 +51,20 @@
                         </li>
                         <li><router-link to="/references">Références</router-link></li>
                         <li><router-link to="/contact">Contact</router-link></li>
+                        <li><router-link to="/rendezvous" style="color:rgb(74, 0, 194)">Prendre un rendez-vous</router-link></li>
                     </ul>
-                </nav><!-- .nav-menu -->
+                    </ul>
+                </nav>
             </div>
         </header>
         <!-- End Header -->
 
+        
+
         <!--- Main sections -->
         <main id="main" class="mt-5">
             <router-view></router-view>
+            <vue-progress-bar></vue-progress-bar> <!-- set progressbar -->
         </main>
         <!--- End Main sections -->
 
@@ -65,7 +73,7 @@
           <div class="footer-top">
             <div class="container">
               <div class="row">
-                <div class="col-lg-3 col-md-6 footer-contact">
+                <div class="col-md-6 footer-contact">
                   <h3>CONSULTING FORMATION</h3>
                   <p>
                     26 RUE DES RIGOLES<br>
@@ -75,18 +83,18 @@
                     <strong>Email:</strong> atmane77@yahoo.fr<br>
                   </p>
                 </div>
-                <div class="col-lg-3 col-md-6 footer-links">
+                <div class="col-md-3 footer-links">
                   <h4>Nos services</h4>
                   <ul>
                     <li><i class="bx bx-chevron-right"></i> <router-link to="#">Web Design</router-link></li>
                   </ul>
                 </div>
 
-                <div class="col-lg-4 col-md-6">
-                  <div class="map-section">
-                    <div style="width: 100%"><iframe width="100%" height="350px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=26%20Rue%20DES%20RIGOLES%2075020%20PARIS%2020+(CONSULTING%20FORMATION)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
-                    </div>
+                <div class="col-md-3 footer-newsletter">
+                  <h4>Rendez-vous avec un de nos agent</h4>
+                  <router-link to="/rendezvous"><i class="bx bx-calendar"></i> Rendez-vous ici ! </router-link>
                 </div>
+                
 
               </div>
             </div>
@@ -96,7 +104,7 @@
 
             <div class="mr-md-auto text-center text-md-left">
               <div class="copyright">
-                &copy; Copyright <strong><span>ConsultingFormation</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>ConsultingFormation</span></strong>. Tous les droits sont réservés
               </div>
             </div>
             <div class="social-links text-center text-md-right pt-3 pt-md-0">

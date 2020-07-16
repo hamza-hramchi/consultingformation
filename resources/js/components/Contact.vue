@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="">
         <!-- ======= Breadcrumbs ======= -->
         <section id="breadcrumbs" class="breadcrumbs">
           <div class="container">
@@ -8,6 +8,10 @@
             </div>
           </div>
         </section><!-- End Breadcrumbs -->
+
+        <div class="map-section">
+          <iframe style="border:0; width: 100%; height: 350px;" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=26%20Rue%20DES%20RIGOLES%2075020%20PARIS%2020+(CONSULTING%20FORMATION)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        </div>
 
         <section id="contact" class="contact">
           <div class="container">
@@ -38,7 +42,6 @@
 
             <div class="row mt-5 justify-content-center" data-aos="fade-up">
               <div class="col-lg-10">
-
                 <form class="php-email-form">
                   <div class="form-row">
                     <div class="col-md-6 form-group">
@@ -97,7 +100,8 @@
                 this.form.message = '';
                 Toast.fire({
                   icon: 'success',
-                  title: 'Message envoyé avec succès !'
+                  title: 'Message envoyé avec succès !',
+                  footer : 'Un mail vous sera envoyé pour répondre à vos questions.'
                 })
                 this.$Progress.finish();
               }
