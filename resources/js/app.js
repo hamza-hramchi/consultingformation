@@ -50,12 +50,12 @@ window.Toast = Toast;
 
 // Routes
 let routes = [
-  { path: '/', component: require('./components/Home.vue').default },
-  { path: '/services', component: require('./components/Services.vue').default },
-  { path: '/references', component: require('./components/References.vue').default },
-  { path: '/contact', component: require('./components/Contact.vue').default },
-  { path: '/rendezvous', component: require('./components/Appointment.vue').default },
-  { path : '/equipe', component: require('./components/Team.vue').default }
+  { path: '/', component: require('./components/MainComponents/Home.vue').default, name : 'accueil' },
+  { path: '/contact', component: require('./components/MainComponents/Contact.vue').default, name : 'contact' },
+  { path: '/rendezvous', component: require('./components/MainComponents/Appointment.vue').default, name : 'rendezvous' },
+  { path : '/methodologie', component: require('./components/MainComponents/Methodology.vue').default, name : 'methodologie' },
+
+  { path : '/transformationdigitale', component: require('./components/ServiceComponents/DigitalTransformation.vue').default, name : 'transformationdigitale' },
 ]
 
 /*--------------------------------------------------------------------------*/

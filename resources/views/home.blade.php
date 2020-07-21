@@ -41,15 +41,17 @@
                 <h5 class="logo mr-auto"><span class="text-success">Consulting</span>Formation</h5>
                 <nav class="nav-menu d-none d-lg-block">
                     <ul class="ml-4">
-                        <li class="active"><router-link to="/">Accueil</router-link></li>
+                        <li class="active"><router-link :to="{name : 'accueil' }">Accueil</router-link></li>
                         <li class="drop-down"><router-link to="">Services</router-link>
                             <ul>
-                                <li><router-link to="#">Service 1</router-link></li>
-                                <li><router-link to="#">Service 2</router-link></li>
-                                <li><router-link to="#">Service 3</router-link></li>
+                                <li><router-link to="/">Transformation digitale</router-link></li>
+                                <li><router-link to="#">Formation Internet des objets</router-link></li>
+                                <li><router-link to="#">Conseil numérique</router-link></li>
                             </ul>
                         </li>
-                        <li><router-link to="/references">Références</router-link></li>
+                        <li>
+                          <router-link to="/methodologie">Méthodologie</router-link>
+                        </li>
                         <li><router-link to="/contact">Contact</router-link></li>
                         <li><router-link to="/rendezvous" style="color:rgb(74, 0, 194)">Prendre un rendez-vous</router-link></li>
                     </ul>
