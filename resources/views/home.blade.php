@@ -44,8 +44,8 @@
                         <li class="active"><router-link :to="{name : 'accueil' }">Accueil</router-link></li>
                         <li class="drop-down"><router-link to="">Services</router-link>
                             <ul>
-                                <li><router-link to="/">Transformation digitale</router-link></li>
-                                <li><router-link to="#">Formation Internet des objets</router-link></li>
+                                <li><router-link :to="{name : 'transformationdigitale'}">Transformation digitale</router-link></li>
+                                <li><router-link :to="{name : 'iotformation'}">Formation Internet des objets</router-link></li>
                                 <li><router-link to="#">Conseil numérique</router-link></li>
                             </ul>
                         </li>
@@ -88,7 +88,9 @@
                 <div class="col-md-3 footer-links">
                   <h4>Nos services</h4>
                   <ul>
-                    <li><i class="bx bx-chevron-right"></i> <router-link to="#">Web Design</router-link></li>
+                    <li><i class="bx bx-chevron-right"></i> <router-link :to="{name : 'transformationdigitale'}">Transformation digitale</router-link></li>
+                    <li><i class="bx bx-chevron-right"></i> <router-link :to="{name : 'iotformation'}">Formation Internet des objets</router-link></li>
+                    <li><i class="bx bx-chevron-right"></i> <router-link to="#">Conseil numérique</router-link></li>
                   </ul>
                 </div>
 

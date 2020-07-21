@@ -56,6 +56,7 @@ let routes = [
   { path : '/methodologie', component: require('./components/MainComponents/Methodology.vue').default, name : 'methodologie' },
 
   { path : '/transformationdigitale', component: require('./components/ServiceComponents/DigitalTransformation.vue').default, name : 'transformationdigitale' },
+  { path : '/iotformation', component: require('./components/ServiceComponents/IOTFormation.vue').default, name : 'iotformation' },
 ]
 
 /*--------------------------------------------------------------------------*/
