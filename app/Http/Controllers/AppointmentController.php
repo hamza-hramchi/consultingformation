@@ -3,83 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use App\Http\Requests\AppointmentRequest;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    
+    public function index(){
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function create(){
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    
+    public function store(AppointmentRequest $request){
+        $time = $this->checkDateTime($request->date,$request->time);
+        if($time){
+            return response()->json($time);
+        }
+        else{
+            Appointment::create($request->all());
+        }
+    }
+
+    public function show(Appointment $appointment){
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appointment $appointment)
-    {
+    public function edit(Appointment $appointment){
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appointment $appointment)
-    {
+    public function update(AppointmentRequest $request, Appointment $appointment){
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Appointment $appointment)
-    {
+    public function destroy(Appointment $appointment){
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Appointment $appointment)
-    {
-        //
+    public function checkDateTime($date,$time){
+        $timeDate = Appointment::where('date','=',$date)->get('time');
+                for($j=0; $j<count($timeDate); $j++){
+                    if($time === $timeDate[$j]->time){
+                        $modifier = strtotime($timeDate[$j]->time);
+                        $verfifyTime = date('H:s', strtotime('+1 hour',$modifier));
+                        if($verfifyTime === "13:00"){
+                            $verfifyTime = strtotime($verfifyTime); 
+                            $verfifyTime = date('H:s', strtotime('+2 hours',$verfifyTime));
+                        }
+                        return $verfifyTime;
+                    }
+                }
     }
+
+
 }

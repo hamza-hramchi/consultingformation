@@ -89,7 +89,7 @@
       },
       
       methods:{
-        saveMessage(event){
+        saveMessage(){
           this.form.post("/contact")
             .then(
               () => {

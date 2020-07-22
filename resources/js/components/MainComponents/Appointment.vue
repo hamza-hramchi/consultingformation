@@ -51,99 +51,93 @@
                 <p class="text-bold">
                   Nous voulons comprendre votre projet, 
                   vos objectifs et vos envies pour vous proposer les solutions qui vous apporteront croissance et sérénité.
-                </p> <br>
-                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#AppointmentModal">
-                  <i class="bx bx-calendar"></i> Réservez votre 1H de consulting dès maintenant</button>
+                </p>
               </div>
                 
                 
             </div> 
 
-            <!-- Modal -->
-            <div class="modal fade" id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="AppointmentModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="AppointmentModalLabel">Rendez-vous chez CONSULTING FORMATION</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form class="php-email-form" v-if="step === 1">
+            <form @submit.prevent="getDateTime" class="php-email-form">
                       <h4 class="text-info"><i class="bx bx-user"></i> Les informations personnelles</h4><hr>
 
                       <div class="form-group">
-                        <label for="gender">Civilité</label>
-                        <select v-model="form.gender" name="gender" id="gender" class="form-control">
+                        <label for="civilite">Civilité</label>
+                        <select v-model="form.civilite" name="civilite" id="civilite" class="form-control" :class="{ 'is-invalid': form.errors.has('civilite') }">
                           <option value="Monsieur">Monsieur</option>
                           <option value="Madame">Madame</option>
                         </select>
+                        <has-error :form="form" field="civilite"></has-error>
+                      </div>
+
+                      <div class="form-group">
+                          <input v-model="form.nom"  type="text" name="nom" class="form-control" id="nom" placeholder="Votre Nom" :class="{ 'is-invalid': form.errors.has('nom') }" />
+                          <has-error :form="form" field="nom"></has-error>
+                      </div>
+
+                      <div class="form-group">
+                          <input v-model="form.prenom"  type="text" name="prenom" class="form-control" id="prenom" placeholder="Votre Prénom" :class="{ 'is-invalid': form.errors.has('prenom') }" />
+                          <has-error :form="form" field="prenom"></has-error>
                       </div>
 
                       <div class="form-row">
                         <div class="col-md-6 form-group">
-                          <input v-model="form.firstname"  type="text" name="firstname" class="form-control" id="firstname" placeholder="Votre Nom" />
+                        <input  type="email" v-model="form.email" class="form-control" name="email" id="email" placeholder="Votre Email" :class="{ 'is-invalid': form.errors.has('email') }" />
+                        <has-error :form="form" field="email"></has-error>
                         </div>
                         <div class="col-md-6 form-group">
-                          <input v-model="form.lastname"  type="text" class="form-control" name="lastname" id="lastname" placeholder="Votre prénom" />
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="col-md-6 form-group">
-                        <input  type="email" v-model="form.email" class="form-control" name="email" id="email" placeholder="Votre Email" />
-                        </div>
-                        <div class="col-md-6 form-group">
-                          <input type="tel" v-model="form.tel" name="tel" id="tel" class="form-control" placeholder="Votre numéro de téléphone">
+                          <input type="telephone" v-model="form.telephone" name="telephone" id="telephone" class="form-control" placeholder="Votre numéro de téléphone" :class="{ 'is-invalid': form.errors.has('telephone') }">
+                          <has-error :form="form" field="telephone"></has-error>
                         </div>
                       </div>
 
                         <div class="form-group">
-                        <h4><i class="bx bx-list-ul"></i> Service</h4>
-                        <select name="service" id="service" v-model="form.service" class="form-control">
+                        <h4 class="text-info"><i class="bx bx-list-ul"></i> Service</h4>
+                        <select name="service" id="service" v-model="form.service" class="form-control" :class="{ 'is-invalid': form.errors.has('service') }">
                           <option value="Transformation digitale">Transformation digitale</option>
                           <option value="Formation Internet des objets">Formation Internet des objets</option>
                           <option value="Conseil numérique">Conseil numérique</option>
                         </select>
+                        <has-error :form="form" field="service"></has-error>
                         </div>
                       
                         <div class="form-group">
-                          <textarea v-model="form.message" name="message" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin !"></textarea>
+                          <textarea v-model="form.message" name="message" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin !" :class="{ 'is-invalid': form.errors.has('message') }"></textarea>
+                          <has-error :form="form" field="message"></has-error>
                         </div>
+
+                      
+                      <h4 class="text-info"><i class="bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
+                      <div class="form-group">
+                        <input v-model="form.date" v-bind:min="form.today" v-bind:disableDays="disableDays" type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
+                        <has-error :form="form" field="date"></has-error>
+                      </div>
+                      
+                      <div class="form-group">
+                        <select v-model="form.time" name="time" id="time" class="form-control"  :class="{ 'is-invalid': form.errors.has('time') }">
+                          <option value="09:00">09:00</option>
+                          <option value="10:00">10:00</option>
+                          <option value="11:00">11:00</option>
+                          <option value="12:00">12:00</option>
+                          <option value="15:00">15:00</option>
+                          <option value="16:00">16:00</option>
+                          <option value="17:00">17:00</option>
+                        </select>
+                        <has-error :form="form" field="time"></has-error>
+                      </div>
 
                       <div class="form-row">
                         <div class="custom-control custom-checkbox custom-control-inline">
                           <input required v-model="valid" type="checkbox" class="custom-control-input" id="valid">
                           <label class="custom-control-label" for="valid"> Je confirme la validité des informations personnelles ci-dessus.</label>
                         </div>
+                      </div><br>
+
+                      <div class="form-group">
+                        <button  class="form-control btn btn-success">Enregistrer</button>
                       </div>
                       
-                        <div class="form-group">
-                          <button @click.prevent="next()" class="form-control btn btn-success">Suivant</button>
-                        </div>
                       
                     </form>
-
-                    <div class="row mt-5 justify-content-center" data-aos="fade-up" v-if="step === 2">
-                      <div class="col-lg-10">
-                        <h4 class="text-info"><i class="bx bx-calendar"></i>Date et heure du rendez-vous</h4>
-                        <VueCtkDateTimePicker v-model="form.date" min-date="2020-07"  label="Veuillez choisir une date" only-date no-weekends-days inline  format="DD-MM-YYYY"  button-now-translation="La date d'ajourd'hui"></VueCtkDateTimePicker>
-                      </div>
-                      <div class="col-lg-10">
-                        <VueCtkDateTimePicker v-model="form.time" v-bind:disabledHours="disabledHours"  format="HH:mm" minute-interval=30 only-time inline ></VueCtkDateTimePicker>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="modal-footer" v-if="step === 2">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
-                    <button @click.prevent="prev()" class="btn btn-info">Précédent</button>
-                    <button @click.prevent="getDateTime" type="button" class="btn btn-success">Enregistrer</button>
-                  </div>
-                </div>
-              </div>
-            </div> 
 
           </div> <!-- End container -->
     </section><!-- End Contact Section -->
@@ -152,59 +146,70 @@
 
 <script>
     export default {
+        
         data(){
             return {
                 form : new Form({
-                  gender : '',
-                  firstname : '',
-                  lastname : '',
+                  civilite : '',
+                  nom : '',
+                  prenom : '',
                   email : '',
-                  tel : '',
+                  telephone : '',
                   service : '',
                   message : '',
                   date : '',
                   time : '',
-                  
+                  today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate()
                 }),
                 valid : false,
-                step : 1 ,
-                disabledHours : ['00','01','02','03','04','05','06','07','08','13','14','18','19','20','21','22','23']
+                disableDays : ['sa','di'],
+                validateTime : ''
             }
         },
 
         methods : {
             getDateTime(){
-                Swal.fire({
-                    title: 'Rendez-vous avec ' + this.gender + ' ' + this.lastname + ' ' + this.firstname ,
-                    text: 'Date : ' + this.date + ' | Heure :  ' + this.time + ' | Service : ' + this.service,
-                    icon: 'success',
-                    showCancelButton: true,
-                    confirmButtonColor: '#25AB20',
-                    cancelButtonColor : '#F51B1B',
-                    confirmButtonText: 'Confirmer',
-                    cancelButtonText : 'Annuler'
-                    }).then((result) => {
-                        // Send request to the server
-                    if(result.value){
-                            this.form.delete('module/'+id)
-                        .then( () => {
-                            Toast.fire({
-                            icon: 'success',
-                            title: 'Module supprimé avec succès'
-                            })
-                        })
-                        .catch( () => {
-                                Swal('Erreur', 'Problème servenue !', 'warning')
-                        })
-                    }
+              this.form.post('/appointment')
+                .then((message) => {
+                  console.log(message.data);
+                  if(message.data != ''){
+                    this.validateTime = message.data
+                    Swal.fire({
+                    position: 'top',
+                    icon: 'warning',
+                    title: 'La date : ' + this.form.time + 'H est déjà prise, nous vous proposons : ' + this.validateTime,
+                    showConfirmButton: false,
+                    timer: 5000
                     })
+                  }
+                  else{
+                    Swal.fire({
+                        title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
+                        text: 'Date : ' + this.form.date + ' | Heure :  ' + this.form.time + ' | Service : ' + this.form.service,
+                        icon: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#25AB20',
+                        cancelButtonColor : '#F51B1B',
+                        confirmButtonText: 'Confirmer',
+                        cancelButtonText : 'Annuler'
+                        }).then((result) => {
+                        if(result.value){
+                                Toast.fire({
+                                icon: 'success',
+                                title: 'Rendez vous pris !'
+                                });
+                              }
+                        })
+                  }
+                  
+                }).catch(() => {
+                  this.$Progress.start();
+                  this.$Progress.fail();
+                  Swal('Erreur', 'Problème servenue !', 'warning');
+
+                })
                 
-            },
-            prev() {
-              this.step--;
-            },
-            next() {
-              this.step++;
+                
             },
         },
 

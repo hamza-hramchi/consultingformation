@@ -6,8 +6,6 @@ import { Form, HasError, AlertError } from 'vform'
 import VueRouter from 'vue-router'
 import VueProgressBar from 'vue-progressbar'
 import Swal from 'sweetalert2'
-import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
-import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 
 /*--------------------------------------------------------------------------*/
 
@@ -28,7 +26,8 @@ Vue.use(VueProgressBar, {
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
-Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
+Vue.component('infos-perso',require('./components/GlobalComponents/PersonalInfos.vue').default);
+Vue.component('date-time',require('./components/GlobalComponents/DateTime.vue').default);
 
 /*--------------------------------------------------------------------------*/
 

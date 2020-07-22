@@ -3,22 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 
 Auth::routes();
 
+// Get Home view
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?');
 
+// Resource routes for contact
 Route::resource('/contact', 'ContactController');
+
+// Resource routes for appointment
+Route::resource('/appointment','AppointmentController');
+
+// Manage any route
+Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?');
