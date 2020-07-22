@@ -52,7 +52,7 @@
                   Nous voulons comprendre votre projet, 
                   vos objectifs et vos envies pour vous proposer les solutions qui vous apporteront croissance et sérénité.
                 </p> <br>
-                <button type="button" class="btn btn-warning btn-outline-dark btn-lg" data-toggle="modal" data-target="#AppointmentModal">
+                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#AppointmentModal">
                   <i class="bx bx-calendar"></i> Réservez votre 1H de consulting dès maintenant</button>
               </div>
                 
@@ -75,7 +75,7 @@
 
                       <div class="form-group">
                         <label for="gender">Civilité</label>
-                        <select v-model="gender" name="gender" id="gender" class="form-control">
+                        <select v-model="form.gender" name="gender" id="gender" class="form-control">
                           <option value="Monsieur">Monsieur</option>
                           <option value="Madame">Madame</option>
                         </select>
@@ -83,38 +83,38 @@
 
                       <div class="form-row">
                         <div class="col-md-6 form-group">
-                          <input v-model="firstname"  type="text" name="firstname" class="form-control" id="firstname" placeholder="Votre Nom" />
+                          <input v-model="form.firstname"  type="text" name="firstname" class="form-control" id="firstname" placeholder="Votre Nom" />
                         </div>
                         <div class="col-md-6 form-group">
-                          <input v-model="lastname"  type="text" class="form-control" name="lastname" id="lastname" placeholder="Votre prénom" />
+                          <input v-model="form.lastname"  type="text" class="form-control" name="lastname" id="lastname" placeholder="Votre prénom" />
                         </div>
                       </div>
 
                       <div class="form-row">
                         <div class="col-md-6 form-group">
-                        <input  type="email" class="form-control" name="email" id="email" placeholder="Votre Email" />
+                        <input  type="email" v-model="form.email" class="form-control" name="email" id="email" placeholder="Votre Email" />
                         </div>
                         <div class="col-md-6 form-group">
-                          <input type="tel" name="tel" id="tel" class="form-control" placeholder="Numéro de téléphone">
+                          <input type="tel" v-model="form.tel" name="tel" id="tel" class="form-control" placeholder="Votre numéro de téléphone">
                         </div>
                       </div>
 
                         <div class="form-group">
                         <h4><i class="bx bx-list-ul"></i> Service</h4>
-                        <select name="service" id="service" v-model="service" class="form-control">
-                          <option value="IOT">IOT</option>
-                          <option value="RH">RH</option>
-                          <option value="DEV">DEV</option>
+                        <select name="service" id="service" v-model="form.service" class="form-control">
+                          <option value="Transformation digitale">Transformation digitale</option>
+                          <option value="Formation Internet des objets">Formation Internet des objets</option>
+                          <option value="Conseil numérique">Conseil numérique</option>
                         </select>
                         </div>
                       
                         <div class="form-group">
-                          <textarea name="besoin" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin !"></textarea>
+                          <textarea v-model="form.message" name="message" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin !"></textarea>
                         </div>
 
                       <div class="form-row">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                          <input type="checkbox" class="custom-control-input" id="valid">
+                          <input required v-model="valid" type="checkbox" class="custom-control-input" id="valid">
                           <label class="custom-control-label" for="valid"> Je confirme la validité des informations personnelles ci-dessus.</label>
                         </div>
                       </div>
@@ -128,10 +128,10 @@
                     <div class="row mt-5 justify-content-center" data-aos="fade-up" v-if="step === 2">
                       <div class="col-lg-10">
                         <h4 class="text-info"><i class="bx bx-calendar"></i>Date et heure du rendez-vous</h4>
-                        <VueCtkDateTimePicker v-model="date" min-date="2020-07"  label="Veuillez choisir une date" only-date no-weekends-days inline  format="DD-MM-YYYY"  button-now-translation="La date d'ajourd'hui"></VueCtkDateTimePicker>
+                        <VueCtkDateTimePicker v-model="form.date" min-date="2020-07"  label="Veuillez choisir une date" only-date no-weekends-days inline  format="DD-MM-YYYY"  button-now-translation="La date d'ajourd'hui"></VueCtkDateTimePicker>
                       </div>
                       <div class="col-lg-10">
-                        <VueCtkDateTimePicker v-model="time" v-bind:disabledHours="disabledHours"  format="HH:mm" minute-interval=30 only-time inline ></VueCtkDateTimePicker>
+                        <VueCtkDateTimePicker v-model="form.time" v-bind:disabledHours="disabledHours"  format="HH:mm" minute-interval=30 only-time inline ></VueCtkDateTimePicker>
                       </div>
                     </div>
 
@@ -154,14 +154,20 @@
     export default {
         data(){
             return {
-                step : 1 ,
-                firstname : '',
-                lastname : '',
-                gender : '',
-                date : '',
-                time : '',
-                service : '',
+                form : new Form({
+                  gender : '',
+                  firstname : '',
+                  lastname : '',
+                  email : '',
+                  tel : '',
+                  service : '',
+                  message : '',
+                  date : '',
+                  time : '',
+                  
+                }),
                 valid : false,
+                step : 1 ,
                 disabledHours : ['00','01','02','03','04','05','06','07','08','13','14','18','19','20','21','22','23']
             }
         },
@@ -177,6 +183,20 @@
                     cancelButtonColor : '#F51B1B',
                     confirmButtonText: 'Confirmer',
                     cancelButtonText : 'Annuler'
+                    }).then((result) => {
+                        // Send request to the server
+                    if(result.value){
+                            this.form.delete('module/'+id)
+                        .then( () => {
+                            Toast.fire({
+                            icon: 'success',
+                            title: 'Module supprimé avec succès'
+                            })
+                        })
+                        .catch( () => {
+                                Swal('Erreur', 'Problème servenue !', 'warning')
+                        })
+                    }
                     })
                 
             },
