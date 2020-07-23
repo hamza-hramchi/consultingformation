@@ -9,6 +9,8 @@ Auth::routes();
 // Get Home view
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?');
+
 // Resource routes for contact
 Route::resource('/contact', 'ContactController');
 
@@ -16,4 +18,3 @@ Route::resource('/contact', 'ContactController');
 Route::resource('/appointment','AppointmentController');
 
 // Manage any route
-Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?');

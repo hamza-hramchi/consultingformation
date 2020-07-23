@@ -8,6 +8,7 @@ import VueProgressBar from 'vue-progressbar'
 import Swal from 'sweetalert2'
 import Vue from 'vue'
 import jsPDF from 'jspdf'
+import NotFound from './components/GlobalComponents/NotFound.vue';
 
 /*--------------------------------------------------------------------------*/
 
@@ -30,6 +31,7 @@ Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('infos-perso',require('./components/GlobalComponents/PersonalInfos.vue').default);
 Vue.component('date-time',require('./components/GlobalComponents/DateTime.vue').default);
+Vue.component('not-found', require('./components/GlobalComponents/NotFound.vue').default);
 
 /*--------------------------------------------------------------------------*/
 
@@ -51,13 +53,17 @@ window.Toast = Toast;
 
 // Routes
 let routes = [
+  { path: '*', component: require('./components/GlobalComponents/NotFound.vue').default },
+
   { path: '/', component: require('./components/MainComponents/Home.vue').default, name : 'accueil' },
-  { path: '/contact', component: require('./components/MainComponents/Contact.vue').default, name : 'contact' },
+  { path: '/contacts', component: require('./components/MainComponents/Contact.vue').default, name : 'contacts' },
   { path: '/rendezvous', component: require('./components/MainComponents/Appointment.vue').default, name : 'rendezvous' },
   { path : '/methodologie', component: require('./components/MainComponents/Methodology.vue').default, name : 'methodologie' },
 
   { path : '/transformationdigitale', component: require('./components/ServiceComponents/DigitalTransformation.vue').default, name : 'transformationdigitale' },
   { path : '/iotformation', component: require('./components/ServiceComponents/IOTFormation.vue').default, name : 'iotformation' },
+
+  
 ]
 
 /*--------------------------------------------------------------------------*/

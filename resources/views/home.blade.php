@@ -52,7 +52,7 @@
                         <li>
                           <router-link to="/methodologie">Méthodologie</router-link>
                         </li>
-                        <li><router-link to="/contact">Contact</router-link></li>
+                        <li><router-link to="/contacts">Contact</router-link></li>
                         <li><router-link to="/rendezvous" style="color:rgb(74, 0, 194)">Prendre un rendez-vous</router-link></li>
                     </ul>
                     </ul>

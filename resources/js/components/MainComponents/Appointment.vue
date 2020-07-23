@@ -148,7 +148,7 @@
                     </form>
 
                     <div ref="content" hidden>
-                      <h3 class="text-center text-bold"><span class="text-success">CONSULTING</span>FORMATION</h3>
+                      <h3 class="text-center"><span class="text-success">CONSULTING</span>FORMATION</h3>
                       <hr>
                       <h4>Rendez vous avec {{form.civilite}} : {{form.prenom}} {{form.nom}}</h4>
                       <p>
@@ -205,28 +205,24 @@ import jsPDF from 'jspdf'
                     })
                   }
                   else{
+                    this.$Progress.start();
                     Swal.fire({
                         title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
                         text: 'Date : ' + this.form.date + ' | Heure :  ' + this.form.time + ' | Service : ' + this.form.service,
                         icon: 'success',
                         showCancelButton: true,
                         confirmButtonColor: '#25AB20',
-                        cancelButtonColor : '#F51B1B',
-                        confirmButtonText: 'Confirmer',
-                        cancelButtonText : 'Annuler'
+                        cancelButtonColor : '#BDB705',
+                        confirmButtonText: 'Télécharger le pdf',
+                        cancelButtonText : 'Non Merci'
                         }).then((result) => {
-                        if(result.value){
-                              /*  Toast.fire({
-                                icon: 'success',
-                                title: 'Rendez vous pris !'
-                                });*/
-                                var doc = new jsPDF('A4');
-                    
-                              
-                              doc.fromHTML(this.$refs.content);
-                              doc.save('rendez-vous.pdf');
-                              }
+                          if(result.value){
+                            var doc = new jsPDF('A4');
+                            doc.fromHTML(this.$refs.content);
+                            doc.save('rendez-vous.pdf');
+                          }
                         })
+                        this.$Progress.finish();
                   }
                   
                 }).catch(() => {
@@ -235,8 +231,6 @@ import jsPDF from 'jspdf'
                   Swal('Erreur', 'Problème servenue !', 'warning');
 
                 })
-                
-                
             },
         },
 
