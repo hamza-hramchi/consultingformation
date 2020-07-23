@@ -6,6 +6,8 @@ import { Form, HasError, AlertError } from 'vform'
 import VueRouter from 'vue-router'
 import VueProgressBar from 'vue-progressbar'
 import Swal from 'sweetalert2'
+import Vue from 'vue'
+import jsPDF from 'jspdf'
 
 /*--------------------------------------------------------------------------*/
 
@@ -14,7 +16,7 @@ window.Swal = Swal;
 window.Form = Form;
 
 /*--------------------------------------------------------------------------*/
-
+Vue.use(jsPDF);
 Vue.use(VueRouter);
 Vue.use(VueProgressBar, {
   color: 'green',

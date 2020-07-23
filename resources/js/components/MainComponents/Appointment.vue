@@ -53,11 +53,13 @@
                   vos objectifs et vos envies pour vous proposer les solutions qui vous apporteront croissance et sérénité.
                 </p>
               </div>
+
+              
                 
                 
             </div> 
 
-            <form @submit.prevent="getDateTime" class="php-email-form">
+            <form @submit.prevent="saveAppointment" class="php-email-form">
                       <h4 class="text-info"><i class="bx bx-user"></i> Les informations personnelles</h4><hr>
 
                       <div class="form-group">
@@ -69,14 +71,16 @@
                         <has-error :form="form" field="civilite"></has-error>
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-row">
+                        <div class="col-md-6 form-group">
                           <input v-model="form.nom"  type="text" name="nom" class="form-control" id="nom" placeholder="Votre Nom" :class="{ 'is-invalid': form.errors.has('nom') }" />
                           <has-error :form="form" field="nom"></has-error>
                       </div>
 
-                      <div class="form-group">
+                      <div class="col-md-6 form-group">
                           <input v-model="form.prenom"  type="text" name="prenom" class="form-control" id="prenom" placeholder="Votre Prénom" :class="{ 'is-invalid': form.errors.has('prenom') }" />
                           <has-error :form="form" field="prenom"></has-error>
+                      </div>
                       </div>
 
                       <div class="form-row">
@@ -108,11 +112,13 @@
                       
                       <h4 class="text-info"><i class="bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
                       <div class="form-group">
-                        <input v-model="form.date" v-bind:min="form.today" v-bind:disableDays="disableDays" type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
+                        <input v-model="form.date" v-bind:min="form.today" v-bind:disabledDays="disabledDays" type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
                         <has-error :form="form" field="date"></has-error>
                       </div>
                       
                       <div class="form-group">
+                        <div class="input-group mb-3">
+                          
                         <select v-model="form.time" name="time" id="time" class="form-control"  :class="{ 'is-invalid': form.errors.has('time') }">
                           <option value="09:00">09:00</option>
                           <option value="10:00">10:00</option>
@@ -122,6 +128,10 @@
                           <option value="16:00">16:00</option>
                           <option value="17:00">17:00</option>
                         </select>
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i class="bx bx-time"></i></span>
+                        </div>
+                        </div>
                         <has-error :form="form" field="time"></has-error>
                       </div>
 
@@ -135,9 +145,21 @@
                       <div class="form-group">
                         <button  class="form-control btn btn-success">Enregistrer</button>
                       </div>
-                      
-                      
                     </form>
+
+                    <div ref="content" hidden>
+                      <h3 class="text-center text-bold"><span class="text-success">CONSULTING</span>FORMATION</h3>
+                      <hr>
+                      <h4>Rendez vous avec {{form.civilite}} : {{form.prenom}} {{form.nom}}</h4>
+                      <p>
+                        Rendez-vous d'une heure avec un de nos agents.
+                        <h4>Les informations du rendez-vous</h4>
+                        Date : {{form.date}} 
+                        Heure : {{form.time}} 
+                        Service : {{form.service}}
+                      </p>
+                    </div>
+
 
           </div> <!-- End container -->
     </section><!-- End Contact Section -->
@@ -145,8 +167,9 @@
 </template>
 
 <script>
+import jsPDF from 'jspdf'
+
     export default {
-        
         data(){
             return {
                 form : new Form({
@@ -162,16 +185,15 @@
                   today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate()
                 }),
                 valid : false,
-                disableDays : ['sa','di'],
+                disabledDays : ['sa','di'],
                 validateTime : ''
             }
         },
 
-        methods : {
-            getDateTime(){
+      methods : {
+            saveAppointment(){
               this.form.post('/appointment')
                 .then((message) => {
-                  console.log(message.data);
                   if(message.data != ''){
                     this.validateTime = message.data
                     Swal.fire({
@@ -194,10 +216,15 @@
                         cancelButtonText : 'Annuler'
                         }).then((result) => {
                         if(result.value){
-                                Toast.fire({
+                              /*  Toast.fire({
                                 icon: 'success',
                                 title: 'Rendez vous pris !'
-                                });
+                                });*/
+                                var doc = new jsPDF('A4');
+                    
+                              
+                              doc.fromHTML(this.$refs.content);
+                              doc.save('rendez-vous.pdf');
                               }
                         })
                   }
@@ -213,8 +240,6 @@
             },
         },
 
-       
-      
       mounted() {}
     }
 </script>
