@@ -153,7 +153,7 @@
                       <h4>Rendez vous avec {{form.civilite}} : {{form.prenom}} {{form.nom}}</h4>
                       <p>
                         Rendez-vous d'une heure avec un de nos agents.
-                        <h4>Les informations du rendez-vous</h4>
+                        Les informations du rendez-vous
                         Date : {{form.date}} 
                         Heure : {{form.time}} 
                         Service : {{form.service}}
