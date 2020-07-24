@@ -90,7 +90,8 @@
       
       methods:{
         saveMessage(){
-          this.form.post("/contact")
+                
+                this.form.post("/contact") 
             .then(
               () => {
                 this.$Progress.start();

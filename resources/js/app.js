@@ -8,7 +8,8 @@ import VueProgressBar from 'vue-progressbar'
 import Swal from 'sweetalert2'
 import Vue from 'vue'
 import jsPDF from 'jspdf'
-import NotFound from './components/GlobalComponents/NotFound.vue';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 /*--------------------------------------------------------------------------*/
 
@@ -17,6 +18,7 @@ window.Swal = Swal;
 window.Form = Form;
 
 /*--------------------------------------------------------------------------*/
+Vue.use(Loading);
 Vue.use(jsPDF);
 Vue.use(VueRouter);
 Vue.use(VueProgressBar, {

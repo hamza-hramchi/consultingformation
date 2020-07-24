@@ -192,14 +192,24 @@ import jsPDF from 'jspdf'
 
       methods : {
             saveAppointment(){
+              let loader = this.$loading.show({
+                // Optional parameters
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: true,
+                onCancel: this.onCancel,
+                color : 'green',
+                height : 100,
+                width : 100
+                });
               this.form.post('/appointment')
                 .then((message) => {
+                  loader.hide()
                   if(message.data != ''){
                     this.validateTime = message.data
                     Swal.fire({
                     position: 'top',
                     icon: 'warning',
-                    title: 'La date : ' + this.form.time + 'H est déjà prise, nous vous proposons : ' + this.validateTime,
+                    title: "L'heure " + this.form.time + 'H est déjà prise, nous vous proposons : ' + this.validateTime,
                     showConfirmButton: false,
                     timer: 5000
                     })
