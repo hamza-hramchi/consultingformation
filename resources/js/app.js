@@ -53,7 +53,6 @@ window.Toast = Toast;
 
 // Routes
 let routes = [
-  { path: '*', component: require('./components/GlobalComponents/NotFound.vue').default },
 
   { path: '/', component: require('./components/MainComponents/Home.vue').default, name : 'accueil' },
   { path: '/contacts', component: require('./components/MainComponents/Contact.vue').default, name : 'contacts' },
