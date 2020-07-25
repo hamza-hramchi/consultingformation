@@ -10,11 +10,11 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    <!-- ======= methodology Section ======= -->
+    <section id="methodology" class="methodology">
       <div class="container" data-aos="fade-up">
         <div class="section-title" data-aos="fade-up">
-            <h2 class="text-info">DES MOYENS HUMAINS ET TECHNOLOGIQUES</h2>
+            <h2>DES MOYENS HUMAINS ET TECHNOLOGIQUES</h2>
             <p>
                 Nous conjuguons nos savoir-faire humains avec la technologie pour vous délivrer le meilleur résultat. 
                 Convaincus du gain d’efficacité apporté par la technologie dans la gestion opérationnelle de vos campagnes d’acquisition, 
@@ -25,7 +25,7 @@
          </div>
 
          <div class="section-title" data-aos="fade-up">
-            <h2 class="text-info">UN ACCOMPAGNEMENT EXPERT</h2>
+            <h2>UN ACCOMPAGNEMENT EXPERT</h2>
             <p>
                 Un consultant expérimenté vous accompagne dans la définition de vos objectifs, 
                 l’élaboration de votre stratégie digitale d’acquisition, la mise en oeuvre des campagnes, 
@@ -33,7 +33,7 @@
             </p>
          </div>
       </div>
-    </section><!-- End Pricing Section -->
+    </section><!-- End methodology Section -->
 
     </div>
 </template>

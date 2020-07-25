@@ -31,9 +31,7 @@ Vue.use(VueProgressBar, {
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
-Vue.component('infos-perso',require('./components/GlobalComponents/PersonalInfos.vue').default);
-Vue.component('date-time',require('./components/GlobalComponents/DateTime.vue').default);
-Vue.component('not-found', require('./components/GlobalComponents/NotFound.vue').default);
+
 
 /*--------------------------------------------------------------------------*/
 
@@ -55,6 +53,7 @@ window.Toast = Toast;
 
 // Routes
 let routes = [
+  {path: '*', component: require('./components/GlobalComponents/NotFound.vue').default},
 
   { path: '/', component: require('./components/MainComponents/Home.vue').default, name : 'accueil' },
   { path: '/contacts', component: require('./components/MainComponents/Contact.vue').default, name : 'contacts' },

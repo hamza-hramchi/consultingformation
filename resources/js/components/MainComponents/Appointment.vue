@@ -148,16 +148,21 @@
                     </form>
 
                     <div ref="content" hidden>
-                      <h3 class="text-center"><span class="text-success">CONSULTING</span>FORMATION</h3>
+                      <h4>Rendez-vous avec {{form.civilite}} <strong style="color: blue"> {{ form.nom}} {{form.prenom}} </strong> </h4>
+                      <ul>
+                          <li><strong>Date :</strong> {{ form.date }} </li>
+                          <li><strong>Heure :</strong> {{ form.time }} </li>
+                          <li><strong>Service :</strong> {{ form.service }} </li>
+                          <li><strong>Durée :</strong> 1 heure</li>
+                      </ul>
                       <hr>
-                      <h4>Rendez vous avec {{form.civilite}} : {{form.prenom}} {{form.nom}}</h4>
-                      <p>
-                        Rendez-vous d'une heure avec un de nos agents.
-                        Les informations du rendez-vous
-                        Date : {{form.date}} 
-                        Heure : {{form.time}} 
-                        Service : {{form.service}}
-                      </p>
+                      <span>
+                        CONSULTING FORMATION,  
+                        26 RUE DES RIGOLES, 
+                        75020 PARIS 20,  
+                        +33 7 51 32 47 11, 
+                        atmane77@yahoo.fr
+                      </span>
                     </div>
 
 
@@ -205,14 +210,25 @@ import jsPDF from 'jspdf'
                 .then((message) => {
                   loader.hide()
                   if(message.data != ''){
-                    this.validateTime = message.data
-                    Swal.fire({
-                    position: 'top',
-                    icon: 'warning',
-                    title: "L'heure " + this.form.time + 'H est déjà prise, nous vous proposons : ' + this.validateTime,
-                    showConfirmButton: false,
-                    timer: 5000
-                    })
+                    if(message.data == '18:00'){
+                      Swal.fire({
+                        position: 'top',
+                        icon: 'warning',
+                        title: 'Veuillez choisir une autre date',
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                    }
+                    else{
+                      this.validateTime = message.data
+                      Swal.fire({
+                        position: 'top',
+                        icon: 'warning',
+                        title: "L'heure " + this.form.time + 'H est déjà prise, nous vous proposons : ' + this.validateTime,
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                    }
                   }
                   else{
                     this.$Progress.start();
@@ -236,6 +252,7 @@ import jsPDF from 'jspdf'
                   }
                   
                 }).catch(() => {
+                  loader.hide()
                   this.$Progress.start();
                   this.$Progress.fail();
                   Swal('Erreur', 'Problème servenue !', 'warning');

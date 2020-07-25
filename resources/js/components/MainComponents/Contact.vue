@@ -89,11 +89,20 @@
       },
       
       methods:{
-        saveMessage(){
-                
-                this.form.post("/contact") 
+        saveMessage(){  
+          let loader = this.$loading.show({
+                // Optional parameters
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: true,
+                onCancel: this.onCancel,
+                color : 'green',
+                height : 100,
+                width : 100
+                });  
+          this.form.post("/contact") 
             .then(
               () => {
+                loader.hide()
                 this.$Progress.start();
                 this.form.name = '';
                 this.form.email = '';
