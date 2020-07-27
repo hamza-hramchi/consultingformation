@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
-    <h3>Bonjour {{$data['name']}}</h3>
-    <p>{{$data['message']}}</p>
+    <h4>Bonjour <strong style="color: blue"> {{$data['name']}}</strong> </h4>
+    <p>{{ $data['message'] }}</p>
+    <p>Cordialement.</p>
+
     <hr>
     <span>
         <p>CONSULTING FORMATION</p> 

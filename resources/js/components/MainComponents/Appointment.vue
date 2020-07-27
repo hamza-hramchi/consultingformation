@@ -112,7 +112,7 @@
                       
                       <h4 class="text-info"><i class="bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
                       <div class="form-group">
-                        <input v-model="form.date" v-bind:min="form.today" v-bind:disabledDays="disabledDays" type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
+                        <input v-model="form.date" v-bind:week="week"  v-bind:min="today"  type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
                         <has-error :form="form" field="date"></has-error>
                       </div>
                       
@@ -187,20 +187,20 @@ import jsPDF from 'jspdf'
                   message : '',
                   date : '',
                   time : '',
-                  today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate()
                 }),
                 valid : false,
-                disabledDays : ['sa','di'],
-                validateTime : ''
+                week : false,
+                validateTime : '',
+                today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate(),
             }
         },
 
       methods : {
-            saveAppointment(){
+          saveAppointment(){
               let loader = this.$loading.show({
                 // Optional parameters
                 container: this.fullPage ? null : this.$refs.formContainer,
-                canCancel: true,
+                canCancel: false,
                 onCancel: this.onCancel,
                 color : 'green',
                 height : 100,
@@ -208,29 +208,21 @@ import jsPDF from 'jspdf'
                 });
               this.form.post('/appointment')
                 .then((message) => {
+                  this.validateTime = message.data
                   loader.hide()
-                  if(message.data != ''){
-                    if(message.data == '18:00'){
+                    var dateName = new Date(this.form.date).getUTCDay();
+                    if((dateName==0 ) || (dateName==6) || (message.data==0)){
                       Swal.fire({
                         position: 'top',
-                        icon: 'warning',
+                        icon: 'info',
                         title: 'Veuillez choisir une autre date',
                         showConfirmButton: false,
                         timer: 5000
                       })
                     }
-                    else{
-                      this.validateTime = message.data
-                      Swal.fire({
-                        position: 'top',
-                        icon: 'warning',
-                        title: "L'heure " + this.form.time + 'H est déjà prise, nous vous proposons : ' + this.validateTime,
-                        showConfirmButton: false,
-                        timer: 5000
-                      })
-                    }
-                  }
-                  else{
+
+                    
+                  if(message.data == this.form.time){
                     this.$Progress.start();
                     Swal.fire({
                         title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
@@ -251,16 +243,25 @@ import jsPDF from 'jspdf'
                         this.$Progress.finish();
                   }
                   
+                  if((message.data != this.form.time) && (message.data != 0)){
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'warning',
+                        title: "Rendez-vous indisponible, nous vous proposons :  " + this.validateTime,
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                  }
+                  
                 }).catch(() => {
                   loader.hide()
                   this.$Progress.start();
                   this.$Progress.fail();
-                  Swal('Erreur', 'Problème servenue !', 'warning');
-
                 })
             },
         },
 
-      mounted() {}
+      mounted() {
+      }
     }
 </script>

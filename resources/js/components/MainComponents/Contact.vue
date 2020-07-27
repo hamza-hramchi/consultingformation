@@ -118,6 +118,7 @@
             )
             .catch(
               () => {
+                  loader.hide();
                   this.$Progress.start();
                   this.$Progress.fail();
                 }

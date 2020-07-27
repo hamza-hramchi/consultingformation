@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
+    <h4>Bonjour,</h4>
     <h4>Rendez-vous avec {{$data['civilite']}} <strong style="color: blue"> {{$data['prenom']}} {{$data['nom']}}</strong> </h4>
     <ul>
         <li><strong>Date :</strong> {{ $data['date'] }} </li>

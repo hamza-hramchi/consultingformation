@@ -22,22 +22,32 @@ class AppointmentController extends Controller
 
     
     public function store(AppointmentRequest $request){
+        $number = count(Appointment::where('date','=',$request->date)->get('time'));
         $time = $this->checkDateTime($request->date,$request->time);
-        if($time){
-            return response()->json($time);
+        if($number == 7){
+            return $time = 0;
         }
         else{
-            Appointment::create($request->all());
-            $data = [
-                'civilite' => $request->civilite,
-                'nom'      => $request->nom,
-                'prenom'   => $request->prenom,
-                'date'     => date("d - m - Y", strtotime($request->date)),
-                'heure'    => $request->time,
-                'service'  => $request->service,
-            ];
-            return Mail::to($request->email)->send(new AppointmentMail($data));
+            if($time == $request->time){
+                Appointment::create($request->all());
+               /* $data = [
+                    'civilite' => $request->civilite,
+                    'nom'      => $request->nom,
+                    'prenom'   => $request->prenom,
+                    'date'     => date("d-m-Y", strtotime($request->date)),
+                    'heure'    => $request->time,
+                    'service'  => $request->service,
+                ];
+                Mail::to($request->email)->send(new AppointmentMail($data));*/
+                return $time;
+            }
+            else{
+                return $time;
+            }
         }
+        
+            
+        
     }
 
     public function show(Appointment $appointment){
@@ -57,7 +67,7 @@ class AppointmentController extends Controller
     }
 
     public function checkDateTime($date,$time){
-        $timeDate = Appointment::where('date','=',$date)->get('time');
+        /*$timeDate = Appointment::where('date','=',$date)->get('time');
         $allTimes = json_decode(Appointment::get('time'));
                 for($j=0; $j<count($timeDate); $j++){
                     if($time === $timeDate[$j]->time){
@@ -69,7 +79,27 @@ class AppointmentController extends Controller
                         }
                         return $verfifyTime;
                     }
-                }
+                }*/
+        $times = json_decode(Appointment::where('date','=',$date)->get('time'));
+        $array = ['09:00','10:00','11:00','12:00','15:00','16:00','17:00'];
+        $data = [];
+        $verfifyTime = $time;
+        for($i=0; $i<count($times); $i++){
+            array_push($data,$times[$i]->time);
+        }
+        if(in_array($time,$data) == true){
+            $key = array_search($time,$array);
+            unset($array[$key]);
+            for($i=0; $i<count($times); $i++){
+                array_push($data,$times[$i]->time);
+            }
+            if(in_array($verfifyTime,$data)){
+                $key = array_search($verfifyTime,$array);
+                unset($array[$key]);
+            }
+            $verfifyTime = $array[array_rand($array)];
+        }
+        return $verfifyTime;
     }
 
 
