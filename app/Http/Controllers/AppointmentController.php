@@ -23,12 +23,16 @@ class AppointmentController extends Controller
     
     public function store(AppointmentRequest $request){
         $number = count(Appointment::where('date','=',$request->date)->get('time'));
-        $time = $this->checkDateTime($request->date,$request->time);
-        if($number == 7){
+        if($number===7){
             return $time = 0;
+            exit(-1);
         }
         else{
-            if($time == $request->time){
+            $time = $this->checkDateTime($request->date,$request->time);
+            if($time != $request->time){
+                return $time;
+            }
+            else{
                 Appointment::create($request->all());
                 $data = [
                     'civilite' => $request->civilite,
@@ -39,10 +43,7 @@ class AppointmentController extends Controller
                     'service'  => $request->service,
                 ];
                 Mail::to($request->email)->send(new AppointmentMail($data));
-                return $time;
-            }
-            else{
-                return $time;
+                return $request->time;
             }
         }
         
@@ -67,40 +68,35 @@ class AppointmentController extends Controller
     }
 
     public function checkDateTime($date,$time){
-        /*$timeDate = Appointment::where('date','=',$date)->get('time');
-        $allTimes = json_decode(Appointment::get('time'));
-                for($j=0; $j<count($timeDate); $j++){
-                    if($time === $timeDate[$j]->time){
-                        $modifier = strtotime($timeDate[$j]->time);
-                        $verfifyTime = date('H:s', strtotime('+1 hour',$modifier));
-                        if($verfifyTime === "13:00"){
-                            $verfifyTime = strtotime($verfifyTime); 
-                            $verfifyTime = date('H:s', strtotime('+2 hours',$verfifyTime));
-                        }
-                        return $verfifyTime;
-                    }
-                }*/
         $times = json_decode(Appointment::where('date','=',$date)->get('time'));
         $array = ['09:00','10:00','11:00','12:00','15:00','16:00','17:00'];
         $data = [];
-        $verfifyTime = $time;
+        $verifyTime = $time;
         for($i=0; $i<count($times); $i++){
             array_push($data,$times[$i]->time);
         }
         if(in_array($time,$data) == true){
             $key = array_search($time,$array);
             unset($array[$key]);
-            for($i=0; $i<count($times); $i++){
-                array_push($data,$times[$i]->time);
-            }
-            if(in_array($verfifyTime,$data)){
-                $key = array_search($verfifyTime,$array);
-                unset($array[$key]);
-            }
-            $verfifyTime = $array[array_rand($array)];
+            $verifyTime = $array[array_rand($array)];
         }
-        return $verfifyTime;
+        return $verifyTime;
     }
 
 
 }
+
+
+/*$timeDate = Appointment::where('date','=',$date)->get('time');
+        $allTimes = json_decode(Appointment::get('time'));
+                for($j=0; $j<count($timeDate); $j++){
+                    if($time === $timeDate[$j]->time){
+                        $modifier = strtotime($timeDate[$j]->time);
+                        $verifyTime = date('H:s', strtotime('+1 hour',$modifier));
+                        if($verifyTime === "13:00"){
+                            $verifyTime = strtotime($verifyTime); 
+                            $verifyTime = date('H:s', strtotime('+2 hours',$verifyTime));
+                        }
+                        return $verifyTime;
+                    }
+                }*/

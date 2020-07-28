@@ -197,6 +197,18 @@ import jsPDF from 'jspdf'
 
       methods : {
           saveAppointment(){
+            let dateName = new Date(this.form.date).getUTCDay();
+            if((dateName==0 ) || (dateName==6)){
+              Swal.fire({
+                        position: 'top',
+                        icon: 'info',
+                        title: 'Veuillez choisir une autre date',
+                        showConfirmButton: false,
+                        timer: 4000
+                      })
+              stop();
+            }
+            else{
               let loader = this.$loading.show({
                 // Optional parameters
                 container: this.fullPage ? null : this.$refs.formContainer,
@@ -212,8 +224,7 @@ import jsPDF from 'jspdf'
                 .then((message) => {
                   this.validateTime = message.data
                   loader.hide()
-                    var dateName = new Date(this.form.date).getUTCDay();
-                    if((dateName==0 ) || (dateName==6) || (message.data==0)){
+                    if(message.data==0){
                       Swal.fire({
                         position: 'top',
                         icon: 'info',
@@ -222,7 +233,6 @@ import jsPDF from 'jspdf'
                         timer: 5000
                       })
                     }
-
                     
                   else if(message.data == this.form.time){
                     this.$Progress.start();
@@ -256,10 +266,11 @@ import jsPDF from 'jspdf'
                   }
                   
                 }).catch(() => {
-                  loader.hide()
                   this.$Progress.start();
+                  loader.hide()
                   this.$Progress.fail();
                 })
+            }
             },
         },
 
