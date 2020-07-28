@@ -200,11 +200,13 @@ import jsPDF from 'jspdf'
               let loader = this.$loading.show({
                 // Optional parameters
                 container: this.fullPage ? null : this.$refs.formContainer,
+                loader : 'dots',
                 canCancel: false,
                 onCancel: this.onCancel,
                 color : 'green',
                 height : 100,
-                width : 100
+                width : 100,
+                backgroundColor: '#ffffff',
                 });
               this.form.post('/appointment')
                 .then((message) => {
@@ -222,7 +224,7 @@ import jsPDF from 'jspdf'
                     }
 
                     
-                  if(message.data == this.form.time){
+                  else if(message.data == this.form.time){
                     this.$Progress.start();
                     Swal.fire({
                         title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
@@ -243,7 +245,7 @@ import jsPDF from 'jspdf'
                         this.$Progress.finish();
                   }
                   
-                  if((message.data != this.form.time) && (message.data != 0)){
+                  else{
                     Swal.fire({
                         position: 'top',
                         icon: 'warning',
