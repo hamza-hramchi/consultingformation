@@ -53,17 +53,24 @@ window.Toast = Toast;
 
 // Routes
 let routes = [
+
+  // Any routes
   {path: '*', component: require('./components/GlobalComponents/NotFound.vue').default},
 
+  // Routes for Main Components
   { path: '/', component: require('./components/MainComponents/Home.vue').default, name : 'accueil' },
   { path: '/contacts', component: require('./components/MainComponents/Contact.vue').default, name : 'contacts' },
   { path: '/rendezvous', component: require('./components/MainComponents/Appointment.vue').default, name : 'rendezvous' },
   { path : '/methodologie', component: require('./components/MainComponents/Methodology.vue').default, name : 'methodologie' },
 
+  // Routes for Service Componenets
   { path : '/transformationdigitale', component: require('./components/ServiceComponents/DigitalTransformation.vue').default, name : 'transformationdigitale' },
   { path : '/iotformation', component: require('./components/ServiceComponents/IOTFormation.vue').default, name : 'iotformation' },
 
-  
+  // Routes for Dashboard Components
+  { path: '/dashboard', component: require('./components/Dashboard/AppointmentDashboard.vue').default},
+  { path: '/dashboard/contacts', component: require('./components/Dashboard/ContactDashboard.vue').default},
+
 ]
 
 /*--------------------------------------------------------------------------*/

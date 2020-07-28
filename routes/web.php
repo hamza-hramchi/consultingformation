@@ -10,6 +10,9 @@ Auth::routes();
 // Get Home view
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/dashboard',function(){
+    return view('dashboard');
+});
 
 // Resource routes for contact
 Route::resource('/contact', 'ContactController');

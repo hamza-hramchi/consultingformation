@@ -13,7 +13,7 @@ class AppointmentController extends Controller
 {
     
     public function index(){
-        //
+        return Appointment::all();
     }
 
     public function create(){
