@@ -24,15 +24,14 @@ class AppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'civilite' => 'required',
-            'nom' => 'required|string|min:3',
-            'prenom' => 'required|string|min:3',
-            'email' => 'required|email',
+            'civilite'  => 'required',
+            'nom'       => 'required|string|min:3',
+            'prenom'    => 'required|string|min:3',
+            'email'     => 'required|email',
             'telephone' => 'required|numeric',
-            'service' => 'required',
-            'message' => 'required',
-            'date' => 'required',
-            'time' => 'required'
+            'service'   => 'required',
+            'date'      => 'required',
+            'time'      => 'required'
         ];
     }
 }

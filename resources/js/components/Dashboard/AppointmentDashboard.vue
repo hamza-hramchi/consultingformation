@@ -8,11 +8,10 @@
                          Gestion des rendez-vous
 
                         <div class="card-tools">
-                            <button class="btn btn-success">Ajouter un rdv
+                            <button class="btn btn-success" @click="add">Ajouter un rendez-vous
                                 <i class="fas fa-calendar"></i>
                             </button>
                         </div>
-
                     </div>
 
                     
@@ -42,7 +41,7 @@
                                         <a style="color:#9F8D0F;" @click="update(rdv)" >Modifier
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a style="color:red;" @click="destroy()"> / Supprimer
+                                        <a style="color:red;" @click="destroy(rdv.id)"> / Supprimer
                                             <i class="fa fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -55,55 +54,50 @@
         </div>
 
     <div class="modal fade" id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="AppointmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 v-show="!editModal" class="modal-title" id="AppointmentModalLabel">Add new user</h5>
-                <h5 v-show="editModal" class="modal-title" id="AppointmentModalLabel">Update user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="modal-header">
+                    <h5 v-show="!editModal" class="modal-title" id="AppointmentModalLabel">Ajouter un rendez-vous</h5>
+                    <h5 v-show="editModal" class="modal-title" id="AppointmentModalLabel">Modifier un rendez-vous</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form @submit.prevent="!editModal ? saveAppointment() : updateAppointment()" class="php-email-form">
+                        <h4 class="text-info"><i class="fas fa-user"></i> Les informations personnelles</h4><hr>
 
-        <form>
-            <div class="modal-body">
+                        <div class="form-group">
+                            <label for="civilite">Civilité</label>
+                            <select v-model="form.civilite" name="civilite" id="civilite" class="form-control" :class="{ 'is-invalid': form.errors.has('civilite') }">
+                                <option value="Monsieur">Monsieur</option>
+                                <option value="Madame">Madame</option>
+                            </select>
+                            <has-error :form="form" field="civilite"></has-error>
+                         </div>
 
-                <form>
-                    <div class="form-group">
-                        <label for="civilite">Civilité</label>
-                        <select v-model="form.civilite" name="civilite" id="civilite" class="form-control" :class="{ 'is-invalid': form.errors.has('civilite') }">
-                          <option value="Monsieur">Monsieur</option>
-                          <option value="Madame">Madame</option>
-                        </select>
-                        <has-error :form="form" field="civilite"></has-error>
-                      </div>
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input v-model="form.nom"  type="text" name="nom" class="form-control" id="nom" placeholder="Votre Nom" :class="{ 'is-invalid': form.errors.has('nom') }" />
+                                <has-error :form="form" field="nom"></has-error>
+                            </div>
 
-                      <div class="form-row">
-                        <div class="col-md-6 form-group">
-                            <label for="nom">Nom</label>
-                          <input v-model="form.nom"  type="text" name="nom" class="form-control" id="nom" placeholder="Votre Nom" :class="{ 'is-invalid': form.errors.has('nom') }" />
-                          <has-error :form="form" field="nom"></has-error>
-                      </div>
-
-                      <div class="col-md-6 form-group">
-                          <label for="prenom">Prénom</label>
-                          <input v-model="form.prenom"  type="text" name="prenom" class="form-control" id="prenom" placeholder="Votre Prénom" :class="{ 'is-invalid': form.errors.has('prenom') }" />
-                          <has-error :form="form" field="prenom"></has-error>
-                      </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="col-md-6 form-group">
-                        <label for="email">Email</label>
-                        <input  type="email" v-model="form.email" class="form-control" name="email" id="email" placeholder="Votre Email" :class="{ 'is-invalid': form.errors.has('email') }" />
-                        <has-error :form="form" field="email"></has-error>
+                            <div class="col-md-6 form-group">
+                                <input v-model="form.prenom"  type="text" name="prenom" class="form-control" id="prenom" placeholder="Votre Prénom" :class="{ 'is-invalid': form.errors.has('prenom') }" />
+                                <has-error :form="form" field="prenom"></has-error>
+                            </div>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label for="telephone">Téléphone</label>
-                          <input type="telephone" v-model="form.telephone" name="telephone" id="telephone" class="form-control" placeholder="Votre numéro de téléphone" :class="{ 'is-invalid': form.errors.has('telephone') }">
-                          <has-error :form="form" field="telephone"></has-error>
+
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input  type="email" v-model="form.email" class="form-control" name="email" id="email" placeholder="Votre Email" :class="{ 'is-invalid': form.errors.has('email') }" />
+                                <has-error :form="form" field="email"></has-error>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input type="telephone" v-model="form.telephone" name="telephone" id="telephone" class="form-control" placeholder="Votre numéro de téléphone" :class="{ 'is-invalid': form.errors.has('telephone') }">
+                                <has-error :form="form" field="telephone"></has-error>
+                            </div>
                         </div>
-                      </div>
 
                         <div class="form-group">
                             <h4 class="text-info"><i class="bx bx-list-ul"></i> Service</h4>
@@ -116,47 +110,38 @@
                         </div>
                       
                         <div class="form-group">
-                            <label for="message">Message</label>
                           <textarea v-model="form.message" name="message" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin !" :class="{ 'is-invalid': form.errors.has('message') }"></textarea>
                           <has-error :form="form" field="message"></has-error>
                         </div>
 
+                        <h4 class="text-info"><i class="fas faa-calendar"></i> Date et heure du rendez-vous</h4><hr>
+                        <div class="form-group">
+                            <input v-model="form.date"  v-bind:min="today"  type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
+                            <has-error :form="form" field="date"></has-error>
+                        </div>
                       
-                      <h4 class="text-info"><i class="bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
-                      <div class="form-group">
-                          <label for="date">Date</label>
-                        <input v-model="form.date"   v-bind:min="today"  type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
-                        <has-error :form="form" field="date"></has-error>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label for="time">Time</label>
-                        <select v-model="form.time" name="time" id="time" class="form-control"  :class="{ 'is-invalid': form.errors.has('time') }">
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                        </select>
-                        <has-error :form="form" field="time"></has-error>
-                      </div>
+                        <div class="form-group">
+                            <select v-model="form.time" name="time" id="time" class="form-control"  :class="{ 'is-invalid': form.errors.has('time') }">
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                            </select>
+                            <has-error :form="form" field="time"></has-error>
+                        </div>
 
-                    
-                </form>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button v-show="!editModal" type="submit" class="btn btn-success">Ajouter rendez-vous</button>
-                <button v-show="editModal" type="submit" class="btn btn-info">Modifier le rendez-vous</button>
-            </div>
-        </form>
-
-            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+                            <button v-show="!editModal" class="btn btn-success">Enregistrer</button>
+                            <button v-show="editModal" class="btn btn-info">Modifier</button>
+                        </div>
+                    </form>
+                </div>
         </div>
+    </div>
     </div>
 </div>
 
@@ -181,6 +166,7 @@
                 }),
                 editModal : true,
                 today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate(),
+                validateTime : '',
 
             }
         },
@@ -197,8 +183,190 @@
                 $("#AppointmentModal").modal("show")     
             },
 
-            destroy(){
-                console.log(this.appointments);
+            destroy(id){
+                Swal.fire({
+                    title: 'Suppression du rendez-vous',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer'
+                    }).then((result) => {
+                        // Send request to the server
+                    if(result.value){
+                            this.form.delete('appointment/'+id)
+                        .then( () => {
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Rendez-vous supprimé !',
+                            })
+                        })
+                        .catch( () => {
+                                Swal('Failed', 'Something was wrong !', 'warning')
+                        })
+                    }
+                    })
+            },
+
+            add(){
+                this.form.civilite = '';
+                this.editModal = false;
+                this.form.nom = '';
+                this.form.prenom = '';
+                this.form.email = '';
+                this.form.telephone = '';
+                this.form.service = '';
+                this.form.message = '';
+                this.form.date = '';
+                this.form.time = '';
+                $("#AppointmentModal").modal("show");
+            },
+
+            saveAppointment(){
+                let dateName = new Date(this.form.date).getUTCDay();
+                if((dateName==0 ) || (dateName==6)){
+                    Swal.fire({
+                        position: 'top',
+                            icon: 'info',
+                            title: 'Veuillez choisir une autre date',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+                    stop();
+                }
+                else{
+                    let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    loader : 'dots',
+                    canCancel: false,
+                    onCancel: this.onCancel,
+                    color : 'green',
+                    height : 100,
+                    width : 100,
+                    backgroundColor: '#ffffff',
+                });
+                this.form.post('/appointment')
+                .then((message) => {
+                  this.validateTime = message.data
+                  loader.hide()
+                    if(message.data==0){
+                      Swal.fire({
+                        position: 'top',
+                        icon: 'info',
+                        title: 'Veuillez choisir une autre date',
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                    }
+                    
+                else if(message.data == this.form.time){
+                    this.$Progress.start();
+                    Swal.fire({
+                        title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
+                        text: 'Date : ' + this.form.date + ' | Heure :  ' + this.form.time + ' | Service : ' + this.form.service,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#25AB20',
+                        confirmButtonText: 'Ok',
+                        }).then((result) => {
+                          if(result.value){
+                            $("#AppointmentModal").modal("hide");
+                          }
+                        })
+                        this.$Progress.finish();
+                }
+                  
+                else{
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'warning',
+                        title: "Rendez-vous indisponible, nous vous proposons :  " + this.validateTime,
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                }
+                  
+                }).catch(() => {
+                  this.$Progress.start();
+                  loader.hide()
+                  this.$Progress.fail();
+                })
+                }
+                
+            },
+
+            updateAppointment(){
+                let dateName = new Date(this.form.date).getUTCDay();
+                if((dateName==0 ) || (dateName==6)){
+                    Swal.fire({
+                        position: 'top',
+                            icon: 'info',
+                            title: 'Veuillez choisir une autre date',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+                    stop();
+                }
+                else{
+                    let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    loader : 'dots',
+                    canCancel: false,
+                    onCancel: this.onCancel,
+                    color : 'green',
+                    height : 100,
+                    width : 100,
+                    backgroundColor: '#ffffff',
+                });
+                this.form.put('appointment/'+ this.form.id)
+                .then((message) => {
+                  this.validateTime = message.data
+                  loader.hide()
+                    if(message.data==0){
+                      Swal.fire({
+                        position: 'top',
+                        icon: 'info',
+                        title: 'Veuillez choisir une autre date',
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                    }
+                    
+                else if(message.data == this.form.time){
+                    this.$Progress.start();
+                    Swal.fire({
+                        title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
+                        text: 'Date : ' + this.form.date + ' | Heure :  ' + this.form.time + ' | Service : ' + this.form.service,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#25AB20',
+                        confirmButtonText: 'Ok',
+                        }).then((result) => {
+                          if(result.value){
+                            $("#AppointmentModal").modal("hide");
+                          }
+                        })
+                        this.$Progress.finish();
+                }
+                  
+                else{
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'warning',
+                        title: "Rendez-vous indisponible, nous vous proposons :  " + this.validateTime,
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                }
+                  
+                }).catch(() => {
+                  this.$Progress.start();
+                  loader.hide()
+                  this.$Progress.fail();
+                })
+                }
             }
         },
 
@@ -207,6 +375,9 @@
         },
 
         created() {
+            setInterval(() => {
+                this.getAppointments();
+            }, 40000);
         }
     }
 </script>

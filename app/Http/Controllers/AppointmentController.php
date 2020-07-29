@@ -16,11 +16,6 @@ class AppointmentController extends Controller
         return Appointment::orderBy('date','asc')->get();
     }
 
-    public function create(){
-        //
-    }
-
-    
     public function store(AppointmentRequest $request){
         $number = count(Appointment::where('date','=',$request->date)->get('time'));
         if($number===7){
@@ -45,26 +40,43 @@ class AppointmentController extends Controller
                 Mail::to($request->email)->send(new AppointmentMail($data));
                 return $request->time;
             }
-        }
-        
-            
-        
+        }  
     }
 
     public function show(Appointment $appointment){
         //
     }
 
-    public function edit(Appointment $appointment){
-        //
+    public function update(AppointmentRequest $request, $id){
+        $number = count(Appointment::where('date','=',$request->date)->get('time'));
+        if($number===7){
+            return $time = 0;
+            exit(-1);
+        }
+        else{
+            $time = $this->checkDateTime($request->date,$request->time);
+            if($time != $request->time){
+                return $time;
+            }
+            else{
+                $appointment = Appointment::findOrFail($id);
+                $appointment->update($request->all());
+                $data = [
+                    'civilite' => $request->civilite,
+                    'nom'      => $request->nom,
+                    'prenom'   => $request->prenom,
+                    'date'     => date("d-m-Y", strtotime($request->date)),
+                    'heure'    => $request->time,
+                    'service'  => $request->service,
+                ];
+                Mail::to($request->email)->send(new AppointmentMail($data));
+                return $request->time;
+            }
+        } 
     }
 
-    public function update(AppointmentRequest $request, Appointment $appointment){
-        //
-    }
-
-    public function destroy(Appointment $appointment){
-        //
+    public function destroy($id){
+        Appointment::destroy([$id]);
     }
 
     public function checkDateTime($date,$time){
@@ -87,7 +99,17 @@ class AppointmentController extends Controller
 }
 
 
-/*$timeDate = Appointment::where('date','=',$date)->get('time');
+
+
+
+
+
+
+
+
+
+
+        /*$timeDate = Appointment::where('date','=',$date)->get('time');
         $allTimes = json_decode(Appointment::get('time'));
                 for($j=0; $j<count($timeDate); $j++){
                     if($time === $timeDate[$j]->time){

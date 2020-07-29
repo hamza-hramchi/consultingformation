@@ -145,7 +145,7 @@
                       <div class="form-group">
                         <button  class="form-control btn btn-success">Enregistrer</button>
                       </div>
-                    </form>
+          </form>
 
                     <div ref="content" hidden>
                       <h4>Rendez-vous avec {{form.civilite}} <strong style="color: blue"> {{ form.nom}} {{form.prenom}} </strong> </h4>
