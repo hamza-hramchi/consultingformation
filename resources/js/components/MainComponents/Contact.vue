@@ -8,11 +8,6 @@
             </div>
           </div>
         </section><!-- End Breadcrumbs -->
-
-        <div class="map-section">
-          <iframe style="border:0; width: 100%; height: 350px;" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=26%20Rue%20DES%20RIGOLES%2075020%20PARIS%2020+(CONSULTING%20FORMATION)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-        </div>
-
         <section id="contact" class="contact">
           <div class="container">
             <div class="row justify-content-center" data-aos="fade-up">

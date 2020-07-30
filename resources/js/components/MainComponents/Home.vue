@@ -65,7 +65,7 @@
     <!-- End About Us Section -->
 
       <!-- ======= Our Clients Section ======= -->
-     <!-- <section id="clients" class="clients">
+      <section id="clients" class="clients">
         <div class="container" data-aos="fade-up">
 
           <div class="section-title">
@@ -125,11 +125,11 @@
           </div>
 
         </div>
-      </section> -->
+      </section>
       <!-- End Our Clients Section -->
 
       <!-- ======= Our Team Section ======= -->
-    <!--  <section id="team" class="team section-bg">
+      <section id="team" class="team section-bg">
         <div class="container">
 
           <div class="section-title" data-aos="fade-up">
@@ -214,7 +214,7 @@
           </div>
 
         </div>
-      </section> -->
+      </section>
       <!-- End Our Team Section -->
 
 </div>

@@ -4,7 +4,7 @@
             <div class="col-md-12 mt-5">
                 <div class="card">
                     <div class="card-header text-dark text-bold">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-calendar"></i>
                          Gestion des rendez-vous
 
                         <div class="card-tools">
@@ -14,7 +14,6 @@
                         </div>
                     </div>
 
-                    
                     <div class="card-body">
                         <table class="table table-hover table-fixed">
                             <thead>
@@ -30,7 +29,7 @@
                             </thead>
 
                             <tbody>
-                                <tr v-for="rdv in appointments" :key="rdv.id">
+                                <tr v-for="rdv in appointments" :key="rdv.id" @click="showDetails(rdv.id)">
                                     <th scope="row">{{ rdv.id }}</th>
                                     <td>{{ rdv.civilite }}</td>
                                     <td>{{ rdv.nom }}</td>
@@ -367,6 +366,10 @@
                   this.$Progress.fail();
                 })
                 }
+            },
+
+            showDetails(id){
+                console.log(id);
             }
         },
 

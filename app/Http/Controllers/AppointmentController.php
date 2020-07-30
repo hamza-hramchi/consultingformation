@@ -18,12 +18,12 @@ class AppointmentController extends Controller
 
     public function store(AppointmentRequest $request){
         $number = count(Appointment::where('date','=',$request->date)->get('time'));
-        if($number===7){
+        $time = $this->checkDateTime($request->date,$request->time);
+        if($number===7 || $time == 0){
             return $time = 0;
             exit(-1);
         }
         else{
-            $time = $this->checkDateTime($request->date,$request->time);
             if($time != $request->time){
                 return $time;
             }
@@ -44,7 +44,6 @@ class AppointmentController extends Controller
     }
 
     public function show(Appointment $appointment){
-        //
     }
 
     public function update(AppointmentRequest $request, $id){
@@ -88,14 +87,23 @@ class AppointmentController extends Controller
             array_push($data,$times[$i]->time);
         }
         if(in_array($time,$data) == true){
-            $key = array_search($time,$array);
-            unset($array[$key]);
-            $verifyTime = $array[array_rand($array)];
+            for($i=0; $i<count($array); $i++){
+                if($array[$i] <= Date('H:i') && $date === Date('Y-m-d') && $array[$i] <= $time){
+                    unset($array[$i]);
+                }
+            }
+            if(count($array) <= 3){
+                $verifyTime = 0;
+            }
+            else{
+                $verifyTime = $array[array_rand($array)];
+                while($verifyTime == $time){
+                    $verifyTime = $array[array_rand($array)];
+                }
+            }
         }
         return $verifyTime;
     }
-
-
 }
 
 

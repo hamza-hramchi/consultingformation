@@ -38,7 +38,7 @@
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center">
-                <h5 class="logo mr-auto"><span class="text-success">Consulting</span>Formation</h5>
+                <router-link to="/"><h5 class="logo mr-auto"><span class="text-success">Consulting</span>Formation</h5></router-link>
                 <nav class="nav-menu d-none d-lg-block">
                     <ul class="ml-4">
                         <li class="active"><router-link :to="{name : 'accueil' }">Accueil</router-link></li>
@@ -53,7 +53,7 @@
                           <router-link to="/methodologie">Méthodologie</router-link>
                         </li>
                         <li><router-link to="/contacts">Contact</router-link></li>
-                        <li><router-link to="/rendezvous" style="color:rgb(74, 0, 194)">Prendre un rendez-vous</router-link></li>
+                        <li><router-link to="/rendezvous" style="color:rgb(29, 94, 37)">Prendre un rendez-vous</router-link></li>
                     </ul>
                     </ul>
                 </nav>

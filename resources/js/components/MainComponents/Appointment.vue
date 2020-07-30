@@ -10,7 +10,7 @@
         </section><!-- End Breadcrumbs -->
 
         <div class="map-section">
-          <iframe style="border:0; width: 100%; height: 350px;" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=26%20Rue%20DES%20RIGOLES%2075020%20PARIS%2020+(CONSULTING%20FORMATION)&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+          <iframe width="100%" height="200px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=26%20Rue%20DES%20RIGOLES+(CONSULTING%20FORMATION)&amp;t=&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
         </div>
 
         <section id="contact" class="contact">
@@ -60,7 +60,7 @@
             </div> 
 
             <form @submit.prevent="saveAppointment" class="php-email-form">
-                      <h4 class="text-info"><i class="bx bx-user"></i> Les informations personnelles</h4><hr>
+                      <h4 class="text-black text-bold"><i class="text-success bx bx-user"></i> Les informations personnelles</h4><hr>
 
                       <div class="form-group">
                         <label for="civilite">Civilité</label>
@@ -95,7 +95,7 @@
                       </div>
 
                         <div class="form-group">
-                        <h4 class="text-info"><i class="bx bx-list-ul"></i> Service</h4>
+                        <h4 class="text-black text-bold"><i class="text-success bx bx-list-ul"></i> Service</h4>
                         <select name="service" id="service" v-model="form.service" class="form-control" :class="{ 'is-invalid': form.errors.has('service') }">
                           <option value="Transformation digitale">Transformation digitale</option>
                           <option value="Formation Internet des objets">Formation Internet des objets</option>
@@ -110,9 +110,9 @@
                         </div>
 
                       
-                      <h4 class="text-info"><i class="bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
+                      <h4 class="text-black text-bold"><i class="text-success bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
                       <div class="form-group">
-                        <input v-model="form.date" v-bind:week="week"  v-bind:min="today"  type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
+                        <input v-model="form.date"  v-bind:min="today"  type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
                         <has-error :form="form" field="date"></has-error>
                       </div>
                       
@@ -131,14 +131,15 @@
                         <div class="input-group-append">
                           <span class="input-group-text"><i class="bx bx-time"></i></span>
                         </div>
-                        </div>
                         <has-error :form="form" field="time"></has-error>
+                        </div>
                       </div>
 
                       <div class="form-row">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                          <input required v-model="valid" type="checkbox" class="custom-control-input" id="valid">
+                          <input  v-model="form.valid" type="checkbox" class="custom-control-input" id="valid" :class="{ 'is-invalid': form.errors.has('valid') }">
                           <label class="custom-control-label" for="valid"> Je confirme la validité des informations personnelles ci-dessus.</label>
+                          <has-error :form="form" field="valid"></has-error>
                         </div>
                       </div><br>
 
@@ -187,9 +188,8 @@ import jsPDF from 'jspdf'
                   message : '',
                   date : '',
                   time : '',
+                  valid : Boolean,
                 }),
-                valid : false,
-                week : false,
                 validateTime : '',
                 today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate(),
             }
@@ -197,12 +197,14 @@ import jsPDF from 'jspdf'
 
       methods : {
           saveAppointment(){
+            var now = new Date();
+            var hour = now.getHours() + ':' + now.getMinutes();
             let dateName = new Date(this.form.date).getUTCDay();
             if((dateName==0 ) || (dateName==6)){
               Swal.fire({
                         position: 'top',
                         icon: 'info',
-                        title: 'Veuillez choisir une autre date',
+                        title: 'Veuillez choisir une autre date !',
                         showConfirmButton: false,
                         timer: 4000
                       })
@@ -219,60 +221,70 @@ import jsPDF from 'jspdf'
                 height : 100,
                 width : 100,
                 backgroundColor: '#ffffff',
-                });
-              this.form.post('/appointment')
+              });
+              if((this.form.date == this.today) && (this.form.time <= hour)){
+                Swal.fire({
+                      position: 'top',
+                      icon: 'warning',
+                      title: "L'heure doit être supérieure à : " + hour,
+                      showConfirmButton: false,
+                      timer: 5000
+                    })
+                loader.hide();
+              }
+              else{
+                this.form.post('/appointment')
                 .then((message) => {
                   this.validateTime = message.data
                   loader.hide()
-                    if(message.data==0){
-                      Swal.fire({
-                        position: 'top',
-                        icon: 'info',
-                        title: 'Veuillez choisir une autre date',
-                        showConfirmButton: false,
-                        timer: 5000
-                      })
-                    }
-                    
+                  if(message.data==0){
+                    Swal.fire({
+                      position: 'top',
+                      icon: 'info',
+                      title: 'Veuillez choisir une autre date',
+                      showConfirmButton: false,
+                      timer: 5000
+                    })
+                  }
                   else if(message.data == this.form.time){
                     this.$Progress.start();
                     Swal.fire({
-                        title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
-                        text: 'Date : ' + this.form.date + ' | Heure :  ' + this.form.time + ' | Service : ' + this.form.service,
-                        icon: 'success',
-                        showCancelButton: true,
-                        confirmButtonColor: '#25AB20',
-                        cancelButtonColor : '#BDB705',
-                        confirmButtonText: 'Télécharger le pdf',
-                        cancelButtonText : 'Non Merci'
-                        }).then((result) => {
-                          if(result.value){
-                            var doc = new jsPDF('A4');
-                            doc.fromHTML(this.$refs.content);
-                            doc.save('rendez-vous.pdf');
-                          }
-                        })
-                        this.$Progress.finish();
-                  }
-                  
+                      title: 'Rendez-vous avec ' + this.form.civilite + ' ' + this.form.prenom + ' ' + this.form.nom ,
+                      text: 'Date : ' + this.form.date + ' | Heure :  ' + this.form.time + ' | Service : ' + this.form.service,
+                      icon: 'success',
+                      showCancelButton: true,
+                      confirmButtonColor: '#25AB20',
+                      cancelButtonColor : '#BDB705',
+                      confirmButtonText: 'Télécharger le pdf',
+                      cancelButtonText : 'Non Merci'
+                    }).then((result) => {
+                        if(result.value){
+                          var doc = new jsPDF('A4');
+                          doc.fromHTML(this.$refs.content);
+                          doc.save('rendez-vous.pdf');
+                        }
+                      })
+                      this.$Progress.finish();
+                    }
                   else{
                     Swal.fire({
-                        position: 'top',
-                        icon: 'warning',
-                        title: "Rendez-vous indisponible, nous vous proposons :  " + this.validateTime,
-                        showConfirmButton: false,
-                        timer: 5000
-                      })
-                  }
-                  
-                }).catch(() => {
+                      position: 'top',
+                      icon: 'warning',
+                      title: "Rendez-vous indisponible, nous vous proposons :  " + this.validateTime,
+                      showConfirmButton: false,
+                      timer: 5000
+                    })
+                  } 
+                })
+                .catch(() => {
                   this.$Progress.start();
                   loader.hide()
                   this.$Progress.fail();
                 })
             }
-            },
-        },
+            }
+          },
+      },
 
       mounted() {
       }

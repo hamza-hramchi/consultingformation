@@ -1,5 +1,13 @@
 <template>
     <div>
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+          <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2>Formation Internet des objets</h2>
+            </div>
+          </div>
+        </section><!-- End Breadcrumbs --> 
         <section id="iot" class="section-bg">
       <div class="container" data-aos="fade-up">
 
