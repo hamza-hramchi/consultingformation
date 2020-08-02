@@ -29,7 +29,7 @@ class AppointmentController extends Controller
             }
             else{
                 Appointment::create($request->all());
-                $data = [
+                /*$data = [
                     'civilite' => $request->civilite,
                     'nom'      => $request->nom,
                     'prenom'   => $request->prenom,
@@ -37,7 +37,7 @@ class AppointmentController extends Controller
                     'heure'    => $request->time,
                     'service'  => $request->service,
                 ];
-                Mail::to($request->email)->send(new AppointmentMail($data));
+                Mail::to($request->email)->send(new AppointmentMail($data));*/
                 return $request->time;
             }
         }  

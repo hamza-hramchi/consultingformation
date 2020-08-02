@@ -112,7 +112,7 @@
                       
                       <h4 class="text-black text-bold"><i class="text-success bx bx-calendar"></i> Date et heure du rendez-vous</h4><hr>
                       <div class="form-group">
-                        <input v-model="form.date"  v-bind:min="today"  type="date" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
+                        <input v-model="form.date" type="date" v-bind:min="today" name="date" id="date" class="form-control" :class="{ 'is-invalid': form.errors.has('date') }">
                         <has-error :form="form" field="date"></has-error>
                       </div>
                       
@@ -134,7 +134,7 @@
                         <has-error :form="form" field="time"></has-error>
                         </div>
                       </div>
-
+                    
                       <div class="form-row">
                         <div class="custom-control custom-checkbox custom-control-inline">
                           <input  v-model="form.valid" type="checkbox" class="custom-control-input" id="valid" :class="{ 'is-invalid': form.errors.has('valid') }">
@@ -191,7 +191,8 @@ import jsPDF from 'jspdf'
                   valid : Boolean,
                 }),
                 validateTime : '',
-                today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + new Date().getDate(),
+                today : new Date().getFullYear() + '-' + ('0'+(new Date().getMonth()+1)).slice(-2) + '-' + ('0'+(new Date().getDate())).slice(-2),
+
             }
         },
 
