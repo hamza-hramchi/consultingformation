@@ -78,14 +78,32 @@ let routes = [
 // Router
 const router = new VueRouter({
     mode : 'history',
-    routes  //raccourci pour `routes: routes`
+    routes , //raccourci pour `routes: routes`
+    scrollBehavior (to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return { x: -4, y: -4 }
+      }
+    }
 })
 
 /*--------------------------------------------------------------------------*/
 
 const app = new Vue({
   el: '#app',
-  router
+  router,
 });
 
 /*--------------------------------------------------------------------------*/
+export default router;
+
+router.beforeEach((to, from, next) => {
+    // Redirect if fullPath begins with a hash (ignore hashes later in path)
+    if (to.fullPath.substr(0,2) === "/#") {
+        const path = to.fullPath.substr(2);
+        next(path);
+        return;
+    }
+    next();
+});

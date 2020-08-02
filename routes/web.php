@@ -17,17 +17,11 @@ Route::get('/dashboard',function(){
 // Resource routes for contact
 Route::resource('/contact', 'ContactController');
 
-/*Route::get('/sendMail',function(){
-    $data = [
-        'email' => 'test@user.fr',
-        'message' => 'Mon message de confirmation'
-    ];
-    Mail::to('hramchi.hamza@gmail.com')->send(new App\Mail\MailCF($data));
-    echo "Email envoyé";
-});*/
-
 // Resource routes for appointment
 Route::resource('/appointment','AppointmentController');
+
+// Search
+Route::get('/search','AppointmentController@search');
 
 // Manage any route
 Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?');

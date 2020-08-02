@@ -104,6 +104,10 @@ class AppointmentController extends Controller
         }
         return $verifyTime;
     }
+
+    public function search(Request $request){
+        return $date = $request->input('date');
+    }
 }
 
 
