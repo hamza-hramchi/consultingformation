@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,7 +20,7 @@ Route::resource('/contact', 'ContactController');
 Route::resource('/appointment','AppointmentController');
 
 // Search
-Route::get('/search','AppointmentController@search');
+Route::get('/search/{date}','AppointmentController@search');
 
 // Manage any route
 Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?');

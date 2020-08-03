@@ -71,24 +71,26 @@
                     <div class="tab-pane fade in show " id="part2" role="">
                         <form  @submit.prevent="searchTimes">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Chercher</button>
+                                <button class="btn btn-success">Chercher</button>
                             </div>
 
                             <div class="form-group">
-                                <input type="date" v-model="search" name="date" id="date" class="form-control">
+                                <input required type="date" v-model="search" name="search" id="search" class="form-control">
                             </div>
                         </form>
-                        
-                                <table  class="table table-hover">
+                                <h2 v-if="results.length == 0" class="text-center text-danger">Aucun rendez-vous pris pour cette date</h2>
+                                <table v-else  class="table table-hover">
                                     <thead>
                                         <th scope="col">Id</th>
                                         <th scope="col">Heure</th>
                                         <th scope="col">Date</th>
                                     </thead>
                                     <tbody>
-                                        <td>1</td>
-                                        <th scope="row">15:00</th>
-                                        <td>2020-08-20</td>
+                                        <tr v-for="info in results" v-bind:key="info.id">
+                                            <td>{{ info.id }}</td>
+                                            <th>{{ info.time }}</th>
+                                            <td>{{ info.date }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 
@@ -485,7 +487,9 @@
             },
 
             searchTimes(){
-                axios.get("/search").then (( {data} ) => (this.results = data));
+                axios.get("/search/" + this.search)
+                    .then(({data}) => { this.results = data })
+                    .catch( () => { console.error() });
             }
         },
 
