@@ -105,7 +105,7 @@
                         </div>
                       
                         <div class="form-group">
-                          <textarea v-model="form.message" name="message" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin !" :class="{ 'is-invalid': form.errors.has('message') }"></textarea>
+                          <textarea v-model="form.message" name="message" id="besoin" cols="30" rows="10" class="form-control" placeholder="Votre besoin ! (facultatif)" :class="{ 'is-invalid': form.errors.has('message') }"></textarea>
                           <has-error :form="form" field="message"></has-error>
                         </div>
 

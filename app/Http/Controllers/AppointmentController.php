@@ -29,37 +29,6 @@ class AppointmentController extends Controller
             }
             else{
                 Appointment::create($request->all());
-                /*$data = [
-                    'civilite' => $request->civilite,
-                    'nom'      => $request->nom,
-                    'prenom'   => $request->prenom,
-                    'date'     => date("d-m-Y", strtotime($request->date)),
-                    'heure'    => $request->time,
-                    'service'  => $request->service,
-                ];
-                Mail::to($request->email)->send(new AppointmentMail($data));*/
-                return $request->time;
-            }
-        }  
-    }
-
-    public function show(Appointment $appointment){
-    }
-
-    public function update(AppointmentRequest $request, $id){
-        $number = count(Appointment::where('date','=',$request->date)->get('time'));
-        if($number===7){
-            return $time = 0;
-            exit(-1);
-        }
-        else{
-            $time = $this->checkDateTime($request->date,$request->time);
-            if($time != $request->time){
-                return $time;
-            }
-            else{
-                $appointment = Appointment::findOrFail($id);
-                $appointment->update($request->all());
                 $data = [
                     'civilite' => $request->civilite,
                     'nom'      => $request->nom,
@@ -71,7 +40,25 @@ class AppointmentController extends Controller
                 Mail::to($request->email)->send(new AppointmentMail($data));
                 return $request->time;
             }
-        } 
+        }  
+    }
+
+    public function show(Appointment $appointment){
+    }
+
+    public function update(AppointmentRequest $request, $id){
+        $appointment = Appointment::findOrFail($id);
+        $appointment->update($request->all());
+        $data = [
+                    'civilite' => $request->civilite,
+                    'nom'      => $request->nom,
+                    'prenom'   => $request->prenom,
+                    'date'     => date("d-m-Y", strtotime($request->date)),
+                    'heure'    => $request->time,
+                    'service'  => $request->service,
+        ];
+        Mail::to($request->email)->send(new AppointmentMail($data));
+        return $request->time;
     }
 
     public function destroy($id){

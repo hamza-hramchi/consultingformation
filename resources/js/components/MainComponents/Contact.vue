@@ -8,6 +8,11 @@
             </div>
           </div>
         </section><!-- End Breadcrumbs -->
+
+        <div class="map-section">
+          <iframe width="100%" height="200px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=26%20Rue%20DES%20RIGOLES+(CONSULTING%20FORMATION)&amp;t=&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        </div>
+
         <section id="contact" class="contact">
           <div class="container">
             <div class="row justify-content-center" data-aos="fade-up">
@@ -22,7 +27,7 @@
                     <div class="col-lg-4 info mt-4 mt-lg-0">
                       <i class="icofont-envelope"></i>
                       <h4>Email</h4>
-                      <p>atmane77@yahoo.fr</p>
+                        <a href="mailto: atmane77@yahoo.fr"><p>atmane77@yahoo.fr</p></a>
                     </div>
 
                     <div class="col-lg-4 info mt-4 mt-lg-0">
@@ -88,12 +93,14 @@
           let loader = this.$loading.show({
                 // Optional parameters
                 container: this.fullPage ? null : this.$refs.formContainer,
-                canCancel: true,
+                loader : 'dots',
+                canCancel: false,
                 onCancel: this.onCancel,
                 color : 'green',
                 height : 100,
-                width : 100
-                });  
+                width : 100,
+                backgroundColor: '#ffffff',
+              }); 
           this.form.post("/contact") 
             .then(
               () => {

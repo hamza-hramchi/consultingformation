@@ -15,6 +15,7 @@ Route::get('/dashboard',function(){
 
 // Resource routes for contact
 Route::resource('/contact', 'ContactController');
+Route::post('/contact/response','ContactController@sendResponse');
 
 // Resource routes for appointment
 Route::resource('/appointment','AppointmentController');

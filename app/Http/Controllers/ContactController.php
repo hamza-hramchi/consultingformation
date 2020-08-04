@@ -12,7 +12,7 @@ class ContactController extends Controller
 {
     
     public function index(){
-        return Contact::all();
+        return Contact::where('response', '=', 0)->get();
     }
 
 
@@ -43,5 +43,17 @@ class ContactController extends Controller
     
     public function destroy(Contact $contact){
         //
+    }
+
+    public function sendResponse(Request $request){
+        $data = [
+            'name' => $request->name,
+            'message' => $request->reponse
+        ];
+        Mail::to($request->email)->send(new MailCF($data));
+        $contact = Contact::findOrFail($request->id);
+        $contact->response = 1;
+        $contact->save();
+        
     }
 }

@@ -75,25 +75,25 @@
                             </div>
 
                             <div class="form-group">
-                                <input required type="date" v-model="search" name="search" id="search" class="form-control">
+                                <input required type="date" v-model="search" v-bind:min="today" name="search" id="search" class="form-control">
                             </div>
+                            <h2 v-if="results.length == 7" class="text-center text-info">Tous les rendez-vous sont pris pour cette date</h2>
                         </form>
-                                <h2 v-if="results.length == 0" class="text-center text-danger">Aucun rendez-vous pris pour cette date</h2>
-                                <table v-else  class="table table-hover">
-                                    <thead>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Heure</th>
-                                        <th scope="col">Date</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="info in results" v-bind:key="info.id">
-                                            <td>{{ info.id }}</td>
-                                            <th>{{ info.time }}</th>
-                                            <td>{{ info.date }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                
+                        <h2 v-if="results.length == 0" class="text-center text-danger">Aucun rendez-vous pris pour cette date</h2>
+                        <table v-else  class="table table-hover">
+                            <thead>
+                                <th scope="col">Id</th>
+                                <th scope="col">Heure</th>
+                                <th scope="col">Date</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="info in results" v-bind:key="info.id">
+                                    <td>{{ info.id }}</td>
+                                    <th>{{ info.time }}</th>
+                                    <td>{{ info.date }}</td>
+                                </tr>
+                            </tbody>
+                        </table>    
                     </div>
                 </div>
                 
@@ -481,7 +481,6 @@
             },
 
             showDetails(rdv){
-                console.log(rdv);
                 this.details.fill(rdv);
                 $("#detailsModal").modal("show");
             },
@@ -495,7 +494,6 @@
 
         mounted(){
             this.getAppointments();
-            console.log(this.today);
         },
 
         created() {

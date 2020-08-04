@@ -58,14 +58,18 @@
 
                     <form v-if="step == 2">
                         <div class="form-group">
+                            <label for="email">Destinataire</label>
+                            <input type="email" v-model="form.email" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="reponse">Votre réponse</label>
-                            <textarea v-model="reponse" name="reponse" id="reponse" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea v-model="form.reponse" name="reponse" id="reponse" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <button type="button" class="form-control btn btn-primary" @click="step = 1">Précedent</button>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="form-control btn btn-success">Envoyer</button>
+                            <button type="button" class="form-control btn btn-success" @click.prevent="sendResponse">Envoyer</button>
                         </div>
                     </form>
                 </div>
@@ -83,13 +87,13 @@
             return {
                 contacts : {},
                 step : 1,
-                reponse : '',
                 form : new Form({
                     id : '',
                     name : '',
                     email : '',
                     title : '',
-                    message : ''
+                    message : '',
+                    reponse : '',
                 }),
             }
         },
@@ -105,12 +109,18 @@
                 $("#contactModal").modal("show");
             },
 
-            next(){
-                this.step = 2;
-            },
-
-            prec(){
-                this.step = 1;
+            sendResponse() {
+                this.form.post("/contact/response")
+                    .then( ({data}) => {
+                        $("#contactModal").modal("hide");
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Réponse envoyé avec succès !',
+                            })
+                    })
+                    .catch( () => {
+                        console.error();
+                    });
             }
         },
 
