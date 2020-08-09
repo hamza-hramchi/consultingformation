@@ -12,7 +12,7 @@ class ContactController extends Controller
 {
     
     public function index(){
-        return Contact::where('response', '=', 0)->get();
+        return response()->json(Contact::where('response', '=', 0)->get());
     }
 
     public function store(ContactRequest $request){

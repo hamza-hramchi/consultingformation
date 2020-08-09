@@ -4,26 +4,29 @@
             <div class="col-md-12 mt-5">
                 <div class="card">
                     <div class="card-header text-dark text-bold"><i class="fas fa-user"></i> Contact Component</div>
-                    <div class="card-body">
-                                <table class="table table-hover table-fixed">
-                                    <thead>
-                                        <tr class="text-primary">
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Nom</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Titre</th>
-                                        </tr>
-                                    </thead>
-                                        <tr v-for="contact in contacts" v-bind:key="contact.id" @click="getMesage(contact)">
-                                            <td>{{ contact.id }}</td>
-                                            <td>{{ contact.name }}</td>
-                                            <td>{{ contact.email }}</td>
-                                            <td>{{ contact.title }}</td>
-                                        </tr>
-                                    <tbody>
-                                        
-                                    </tbody>
-                                </table>
+                        <div class="card-body">
+                            <thead v-if="contacts.length == 0">
+                                <th class="text-center text-danger text-lg" scope="col">Vous avez aucun contact !</th>
+                            </thead>
+
+                            <table class="table table-hover table-fixed">
+                                <thead>
+                                    <tr class="text-primary">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Titre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="contact in contacts" v-bind:key="contact.id" @click="getMesage(contact)">
+                                        <td>{{ contact.id }}</td>
+                                        <td>{{ contact.name }}</td>
+                                        <td>{{ contact.email }}</td>
+                                        <td>{{ contact.title }}</td>
+                                    </tr>     
+                                </tbody>
+                            </table>
                             </div>
                 </div>
             </div>
@@ -101,7 +104,10 @@
         methods: {
             getContacts(){
                 axios.get("/contact")
-                    .then( ({data}) => { this.contacts = data});
+                    .then( ({data}) => {
+                        this.contacts = data;
+                        console.log(data);
+                    });
             },
 
             getMesage(contact){
@@ -126,6 +132,12 @@
 
         mounted() {
             this.getContacts();
+        },
+
+        created() {
+            setInterval(() => {
+                this.getContacts();
+            }, 5000);
         }
     }
 </script>

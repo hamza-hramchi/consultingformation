@@ -13,7 +13,9 @@ class AppointmentController extends Controller
 {
     
     public function index(){
-        return Appointment::orderBy('date','asc')->get();
+        return response()->json(Appointment::orderBy('date','asc')
+                                            ->orderBy('time','asc')
+                                            ->get());
     }
 
     public function store(AppointmentRequest $request){

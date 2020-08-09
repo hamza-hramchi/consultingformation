@@ -52,7 +52,8 @@
                                             <td>{{ rdv.civilite }}</td>
                                             <td>{{ rdv.nom }}</td>
                                             <td>{{ rdv.prenom }}</td>
-                                            <th>{{ rdv.date }}</th>
+                                            <th v-if='rdv.date === "2020-08-10"' class="text-success">{{ rdv.date }}</th>
+                                            <th v-else>{{ rdv.date }}</th>
                                             <th>{{ rdv.time }}</th>
                                             <td>
                                                 <a style="color:#9F8D0F;" @click="update(rdv)" >Modifier
@@ -284,7 +285,10 @@
 
         methods : {
             getAppointments(){
-                axios.get("appointment").then (( {data} ) => (this.appointments = data));
+                axios.get("appointment")
+                .then (( {data} ) => {
+                    this.appointments = data;
+                });
             },
 
             update(rdv){
@@ -301,7 +305,8 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Oui, annuler'
+                    confirmButtonText: 'Oui annler',
+                    cancelButtonText : 'Non'
                     }).then((result) => {
                         // Send request to the server
                     if(result.value){
@@ -309,7 +314,7 @@
                         .then( () => {
                             Toast.fire({
                                 icon: 'success',
-                                title: 'Rendez-vous annulé !',
+                                title: 'Rendez-vous annulé avec succès !',
                             })
                         })
                         .catch( () => {
@@ -489,7 +494,7 @@
                 axios.get("/search/" + this.search)
                     .then(({data}) => { this.results = data })
                     .catch( () => { console.error() });
-            }
+            },
         },
 
         mounted(){
