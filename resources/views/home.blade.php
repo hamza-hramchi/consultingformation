@@ -6,14 +6,9 @@
         
         <title>CONSULTING FORMATION</title>
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Favicons -->
         <link href="assets/img/icon.png" rel="icon">
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +37,7 @@
                 <nav class="nav-menu d-none d-lg-block">
                     <ul class="ml-4">
                         <li class="active"><router-link :to="{name : 'accueil' }">Accueil</router-link></li>
-                        <li class="drop-down"><router-link to="">Services</router-link>
+                        <li class="drop-down"><a to="#">Services</a>
                             <ul>
                                 <li><router-link :to="{name : 'transformationdigitale'}">Transformation digitale</router-link></li>
                                 <li><router-link :to="{name : 'iotformation'}">Formation Internet des objets</router-link></li>

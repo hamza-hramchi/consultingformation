@@ -7,6 +7,7 @@
 </head>
 <body>
     <h4>Bonjour,</h4>
+    @if($data != false)
     <h4>Rendez-vous avec {{$data['civilite']}} <strong style="color: blue"> {{$data['prenom']}} {{$data['nom']}}</strong> </h4>
     <ul>
         <li><strong>Date :</strong> {{ $data['date'] }} </li>
@@ -14,6 +15,9 @@
         <li><strong>Service :</strong> {{ $data['service'] }} </li>
         <li><strong>Durée :</strong> 1 heure</p>
     </ul>
+    @else
+    <h4>Votre rendez-vous à été annulé ! </h4>
+    @endif
     <p>Cordialement.</p>
 
     <hr>

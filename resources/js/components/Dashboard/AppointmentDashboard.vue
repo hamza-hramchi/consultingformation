@@ -48,17 +48,17 @@
 
                                     <tbody>
                                         <tr v-for="rdv in appointments" :key="rdv.id">
-                                            <th scope="row" @click="showDetails(rdv)">{{ rdv.id }}</th>
+                                            <td @click="showDetails(rdv)">{{ rdv.id }}</td>
                                             <td>{{ rdv.civilite }}</td>
                                             <td>{{ rdv.nom }}</td>
                                             <td>{{ rdv.prenom }}</td>
-                                            <td>{{ rdv.date }}</td>
-                                            <td>{{ rdv.time }}</td>
+                                            <th>{{ rdv.date }}</th>
+                                            <th>{{ rdv.time }}</th>
                                             <td>
                                                 <a style="color:#9F8D0F;" @click="update(rdv)" >Modifier
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a style="color:red;" @click="destroy(rdv.id)"> / Supprimer
+                                                <a style="color:red;" @click="destroy(rdv.id)"> / Annuler
                                                     <i class="fa fa-trash-alt"></i>
                                                 </a>
                                             </td>
@@ -296,12 +296,12 @@
 
             destroy(id){
                 Swal.fire({
-                    title: 'Suppression du rendez-vous',
+                    title: 'Annulation du rendez-vous',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Oui, supprimer'
+                    confirmButtonText: 'Oui, annuler'
                     }).then((result) => {
                         // Send request to the server
                     if(result.value){
@@ -309,7 +309,7 @@
                         .then( () => {
                             Toast.fire({
                                 icon: 'success',
-                                title: 'Rendez-vous supprimé !',
+                                title: 'Rendez-vous annulé !',
                             })
                         })
                         .catch( () => {
@@ -499,7 +499,7 @@
         created() {
             setInterval(() => {
                 this.getAppointments();
-            }, 4000);
+            }, 5000);
         }
     }
 </script>

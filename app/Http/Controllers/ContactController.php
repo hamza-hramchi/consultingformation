@@ -15,7 +15,6 @@ class ContactController extends Controller
         return Contact::where('response', '=', 0)->get();
     }
 
-
     public function store(ContactRequest $request){
         Contact::create($request->all());
         $data = [

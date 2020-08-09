@@ -62,6 +62,7 @@ class AppointmentController extends Controller
     }
 
     public function destroy($id){
+        Mail::to(Appointment::find($id)->email)->send(new AppointmentMail(false));
         Appointment::destroy([$id]);
     }
 
