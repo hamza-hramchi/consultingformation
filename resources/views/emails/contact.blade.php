@@ -15,7 +15,7 @@
         <p>CONSULTING FORMATION</p> 
         <p>26 RUE DES RIGOLES</p> 
         <p>75020 PARIS 20</p> 
-        <p>+33 7 51 32 47 11</p>
+        <p>+33 6 60 11 12 23</p>
         <p>atmane77@yahoo.fr</p>
     </span>
 </body>

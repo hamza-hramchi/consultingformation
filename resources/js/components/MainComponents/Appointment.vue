@@ -33,7 +33,7 @@
                     <div class="col-lg-4 info mt-4 mt-lg-0">
                       <i class="icofont-phone"></i>
                       <h4>Téléphone</h4>
-                      <p>+33 7 51 32 47 11</p>
+                      <p>+33 6 60 11 12 23</p>
                     </div>
                   </div>
                 </div>
@@ -53,15 +53,10 @@
                   vos objectifs et vos envies pour vous proposer les solutions qui vous apporteront croissance et sérénité.
                 </p>
               </div>
-
-              
-                
-                
             </div> 
 
             <form @submit.prevent="saveAppointment" class="php-email-form">
                       <h4 class="text-black text-bold"><i class="text-success bx bx-user"></i> Les informations personnelles</h4><hr>
-
                       <div class="form-group">
                         <label for="civilite">Civilité</label>
                         <select v-model="form.civilite" name="civilite" id="civilite" class="form-control" :class="{ 'is-invalid': form.errors.has('civilite') }">
@@ -100,6 +95,8 @@
                           <option value="Transformation digitale">Transformation digitale</option>
                           <option value="Formation Internet des objets">Formation Internet des objets</option>
                           <option value="Conseil numérique">Conseil numérique</option>
+                          <option value="Marketing digital">Marketing digital</option>
+                          <option value="Réferencement SEO">Réferencement SEO</option>
                         </select>
                         <has-error :form="form" field="service"></has-error>
                         </div>
@@ -168,7 +165,7 @@
 
 
           </div> <!-- End container -->
-    </section><!-- End Contact Section -->
+        </section><!-- End Contact Section -->
     </div>
 </template>
 
@@ -224,14 +221,26 @@ import jsPDF from 'jspdf'
                 backgroundColor: '#ffffff',
               });
               if((this.form.date == this.today) && (this.form.time <= hour)){
-                Swal.fire({
+                if(hour >= '16:00'){
+                  loader.hide();
+                  Swal.fire({
                       position: 'top',
                       icon: 'warning',
-                      title: "L'heure doit être supérieure à : " + hour,
+                      title: "Veuillez choisir une autre date !",
                       showConfirmButton: false,
                       timer: 5000
                     })
-                loader.hide();
+                }
+                else{
+                  loader.hide();
+                  Swal.fire({
+                        position: 'top',
+                        icon: 'warning',
+                        title: "L'heure doit être supérieure à : " + hour,
+                        showConfirmButton: false,
+                        timer: 5000
+                      })
+                }
               }
               else{
                 this.form.post('/appointment')

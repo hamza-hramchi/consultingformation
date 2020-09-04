@@ -6,10 +6,10 @@
                     <div class="card-header text-dark text-bold"><i class="fas fa-user"></i> Contact Component</div>
                         <div class="card-body">
                             <thead v-if="contacts.length == 0">
-                                <th class="text-center text-danger text-lg" scope="col">Vous avez aucun contact !</th>
+                                <th class="text-center text-danger text-lg" scope="col">Vous avez aucun message !</th>
                             </thead>
 
-                            <table class="table table-hover table-fixed">
+                            <table class="table table-hover table-fixed" v-if="contacts.length != 0">
                                 <thead>
                                     <tr class="text-primary">
                                         <th scope="col">ID</th>

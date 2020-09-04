@@ -33,7 +33,7 @@
                     <div class="col-lg-4 info mt-4 mt-lg-0">
                       <i class="icofont-phone"></i>
                       <h4>Téléphone</h4>
-                      <p>+33 7 51 32 47 11</p>
+                      <p>+33 6 60 11 12 23</p>
                     </div>
                   </div>
                 </div>

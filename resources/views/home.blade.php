@@ -33,7 +33,7 @@
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center">
-                <router-link to="/"><h5 class="logo mr-auto"><span class="text-success">Consulting</span>Formation</h5></router-link>
+              <router-link to="/"><h5 class="logo mr-auto"><span class="text-success">Consulting</span>Formation</h5></router-link>
                 <nav class="nav-menu d-none d-lg-block">
                     <ul class="ml-4">
                         <li class="active"><router-link :to="{name : 'accueil' }">Accueil</router-link></li>
@@ -41,7 +41,8 @@
                             <ul>
                                 <li><router-link :to="{name : 'transformationdigitale'}">Transformation digitale</router-link></li>
                                 <li><router-link :to="{name : 'iotformation'}">Formation Internet des objets</router-link></li>
-                                <li><router-link to="#">Conseil numérique</router-link></li>
+                                <li><router-link :to="{name : 'digital' }">Marketing digital</router-link></li>
+                                <li><router-link :to="{name : 'seo' }">Référencement SEO</router-link></li>
                             </ul>
                         </li>
                         <li>
@@ -76,7 +77,7 @@
                     26 RUE DES RIGOLES<br>
                     75020 PARIS 20<br>
                     Paris, France <br><br>
-                    <strong>Téléphone</strong> +33 7 51 32 47 11<br>
+                    <strong>Téléphone</strong> +33 6 60 11 12 23<br>
                     <strong>Email:</strong> atmane77@yahoo.fr<br>
                   </p>
                 </div>
@@ -85,7 +86,8 @@
                   <ul>
                     <li><i class="bx bx-chevron-right"></i> <router-link :to="{name : 'transformationdigitale'}">Transformation digitale</router-link></li>
                     <li><i class="bx bx-chevron-right"></i> <router-link :to="{name : 'iotformation'}">Formation Internet des objets</router-link></li>
-                    <li><i class="bx bx-chevron-right"></i> <router-link to="#">Conseil numérique</router-link></li>
+                    <li><i class="bx bx-chevron-right"></i> <router-link :to="{name : 'digital' }">Marketing digital</router-link></li>
+                    <li><i class="bx bx-chevron-right"></i> <router-link :to="{name : 'seo' }">Référencement SEO</router-link></li>
                   </ul>
                 </div>
 
